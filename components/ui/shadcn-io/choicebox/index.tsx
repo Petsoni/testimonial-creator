@@ -30,8 +30,7 @@ export const ChoiceboxItem = ({
     asChild
     className={cn(
       'text-left',
-      '[&[data-state="checked"]]:outline-blue-500 [&[data-state="checked"]]:outline-3',
-      '[&[data-state="checked"]]:bg-primary-foreground'
+      '[&[data-state="checked"]]:bg-gray-950  [&[data-state="checked"]]:*:text-white'
     )}
     {...props}
   >
