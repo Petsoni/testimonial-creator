@@ -61,11 +61,11 @@
   --gray-950: #171717;
 
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: oklch(0.39 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.39 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.39 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
@@ -84,7 +84,7 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-foreground: oklch(0.39 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
@@ -147,6 +147,8 @@ html, body {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
   background: white;
+  background: url("../public/dot-wallpaper.png") no-repeat center center fixed;
+  background-size: cover;
 }
 
 h1, h2, h3, h4, h5, h6, p, a {
@@ -154,8 +156,6 @@ h1, h2, h3, h4, h5, h6, p, a {
 }
 
 h1, h2, h3, h4, h5, h6, p, a {
-  margin: 0;
-  padding: 0;
   letter-spacing: var(--letter-spacing);
 }
 
@@ -210,7 +210,7 @@ p {
   line-height: 1.6;
 }
 
-p, a, li, label, .p-component, input {
+p, a, li, label, input, textarea {
   font-size: 15px !important;
 }
 
