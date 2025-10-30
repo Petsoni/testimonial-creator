@@ -1,11 +1,13 @@
 "use client";
 
 import React, {createContext, useContext, useState} from "react";
-import {CardStyle} from "@/lib/models/card-style.enum";
+import {DisplayTypeEnum} from "@/lib/models/display-type.enum";
 
-interface TestimonialContentContextType {
+export interface TestimonialContentContextType {
     username: string;
     setUsername: (username: string) => void;
+    usernameColor: string;
+    setUsernameColor: (usernameColor: string) => void;
     userFirm: string;
     setUserFirm: (userFirm: string) => void;
     userFirmLink: string;
@@ -14,13 +16,13 @@ interface TestimonialContentContextType {
     setTestimonialText: (text: string) => void;
     separator: string;
     setSeparator: (separator: string) => void;
-    cardStyle: CardStyle;
-    setCardStyle: (cardStyle: CardStyle) => void;
     profilePicturePreview: string | undefined;
     setProfilePicturePreview: (imageString: string) => void;
     imageBorderRadius: string;
     setImageBorderRadius: (borderRadius: string) => void;
 
+    displayType: DisplayTypeEnum;
+    setDisplayType: (displayType: DisplayTypeEnum) => void;
     cardColor: string;
     setCardColor: (color: string) => void;
     cardBorderRadius: string;
@@ -40,15 +42,16 @@ export function TestimonialContentProvider({children}) {
 
     // Left sidebar
     const [username, setUsername] = useState("");
+    const [usernameColor, setUsernameColor] = useState("");
     const [userFirm, setUserFirm] = useState("");
     const [userFirmLink, setUserFirmLink] = useState("");
     const [testimonialText, setTestimonialText] = useState("");
     const [separator, setSeparator] = useState("");
-    const [cardStyle, setCardStyle] = useState(CardStyle.STYLE1);
     const [profilePicturePreview, setProfilePicturePreview] = useState<string | undefined>();
     const [imageBorderRadius, setImageBorderRadius] = useState<string>("2xl");
 
     // Right sidebar
+    const [displayType, setDisplayType] = useState(DisplayTypeEnum.STYLE1);
     const [cardColor, setCardColor] = useState("#FFFFFF");
     const [cardBorderRadius, setCardBorderRadius] = useState<string>("rounded-sm");
     const [cardShadow, setCardShadow] = useState<string>("");
@@ -59,14 +62,16 @@ export function TestimonialContentProvider({children}) {
         <TestimonialContentContext.Provider value={{
             username,
             setUsername,
+            usernameColor,
+            setUsernameColor,
             userFirm,
             setUserFirm,
             testimonialText,
             setTestimonialText,
             separator,
             setSeparator,
-            cardStyle,
-            setCardStyle,
+            displayType,
+            setDisplayType,
             profilePicturePreview,
             setProfilePicturePreview,
             imageBorderRadius,

@@ -1,13 +1,13 @@
 export enum BorderRadiusEnum {
     "NONE" = 'rounded-xs',
     "SMALL" = 'rounded-sm',
-    "MEDIUM" = 'rounded-lg',
+    "MEDIUM" = 'rounded-xl',
     "FULL" = 'rounded-full',
 }
 
 export enum CardBorderRadiusEnum {
     "NONE" = 'rounded-xs',
-    "SMALL" = 'rounded-sm',
-    "MEDIUM" = 'rounded-lg',
-    "FULL" = 'rounded-xl',
+    "SMALL" = 'rounded-md',
+    "MEDIUM" = 'rounded-xl',
+    "FULL" = 'rounded-3xl',
 }
