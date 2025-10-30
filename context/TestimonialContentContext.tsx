@@ -27,6 +27,10 @@ interface TestimonialContentContextType {
     setCardBorderRadius: (borderRadius: string) => void;
     cardShadow: string;
     setCardShadow: (shadow: string) => void;
+    cardBorderWidth: number;
+    setCardBorderWidth: (borderWidth: number) => void;
+    cardBorderColor: string;
+    setCardBorderColor: (borderColor: string) => void;
 }
 
 export const TestimonialContentContext = createContext<TestimonialContentContextType | undefined>(undefined);
@@ -48,6 +52,8 @@ export function TestimonialContentProvider({children}) {
     const [cardColor, setCardColor] = useState("#FFFFFF");
     const [cardBorderRadius, setCardBorderRadius] = useState<string>("rounded-sm");
     const [cardShadow, setCardShadow] = useState<string>("");
+    const [cardBorderWidth, setCardBorderWidth] = useState<number>(0);
+    const [cardBorderColor, setCardBorderColor] = useState<string>("");
 
     return (
         <TestimonialContentContext.Provider value={{
@@ -73,6 +79,10 @@ export function TestimonialContentProvider({children}) {
             setCardBorderRadius,
             cardShadow,
             setCardShadow,
+            cardBorderWidth,
+            setCardBorderWidth,
+            cardBorderColor,
+            setCardBorderColor,
         }}>
             {children}
         </TestimonialContentContext.Provider>

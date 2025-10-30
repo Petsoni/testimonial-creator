@@ -189,13 +189,14 @@ export const DropzoneEmptyState = ({
         <UploadIcon size={16} />
       </div>
       <p className="my-2 w-full truncate text-wrap font-medium text-sm">
-        Upload {maxFiles === 1 ? 'a file' : 'files'}
+        Upload users profile picture
       </p>
       <p className="w-full truncate text-wrap text-muted-foreground text-xs">
         Drag and drop or click to upload
       </p>
       {caption && (
-        <p className="text-wrap text-muted-foreground text-xs">{caption}.</p>
+        // <p className="text-wrap text-muted-foreground text-xs">{caption}.</p>
+        <p className="text-wrap text-muted-foreground text-xs"></p>
       )}
     </div>
   );
