@@ -10,7 +10,7 @@ function UsernameInput() {
     const {setUsername, setUsernameColor} = useTestimonialContent();
 
     return (
-        <Field className="mb-4">
+        <Field className="mb-4 w-full">
             <FieldLabel htmlFor="testimonialUser">Kind words by</FieldLabel>
             <div className="flex flex-row gap-2">
                 <Input id="testimonialUser" type="text" placeholder="Username or name"

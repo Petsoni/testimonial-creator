@@ -53,13 +53,13 @@ function ProfilePictureInput() {
             {/*        ))}*/}
             {/*    </Choicebox>*/}
             {/*)}*/}
-            <Choicebox defaultValue="2xl" className={"flex flex-row w-full"}>
+            <Choicebox defaultValue="rounded-xs" className={"flex flex-row w-full"}>
                 {Object.entries(BorderRadiusEnum).map(([key, value]) => (
                     <ChoiceboxItem onClick={() => {
                         setImageBorderRadius(value);
                     }} key={key} value={value} className={"w-full justify-center"}>
                         <ChoiceboxItemDescription>
-                            <div className={`w-10 h-10 border-2 ${value}`}></div>
+                            <div className={`lg:w-10 lg:h-10 w-5 h-5 border-2 ${value}`}></div>
                         </ChoiceboxItemDescription>
                     </ChoiceboxItem>
                 ))}

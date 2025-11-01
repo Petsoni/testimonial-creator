@@ -24,7 +24,7 @@ function CardStyle2({cardProps}: { cardProps: Partial<TestimonialContentContextT
             <div className="flex flex-row gap-2">
                 <img width={56} height={56}
                      className={`w-full border-2 max-w-14 object-cover h-14 ${cardProps.imageBorderRadius}`}
-                     src={"https://img.freepik.com/free-psd/3d-rendering-religion-icon_23-2151009388.jpg?semt=ais_hybrid&w=740&q=80"}
+                     src={"petsoni-profile.webp"}
                      alt={cardProps.username + " profile image"}/>
                 {cardProps.username != '' || cardProps.userFirm != '' ? (
                     <div className="flex flex-col gap-2">

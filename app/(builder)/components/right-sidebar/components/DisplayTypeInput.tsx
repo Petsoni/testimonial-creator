@@ -11,9 +11,9 @@ function DisplayTypeInput() {
     return (
         <Field className="mb-4">
             <FieldLabel htmlFor="testimonialUser">Display type</FieldLabel>
-            <Choicebox defaultValue="2xl" className={"flex flex-row w-full"}>
+            <Choicebox defaultValue="STYLE1" className={"flex flex-row w-full"}>
                 {Object.entries(DisplayTypeEnum).map(([key, value]) => (
-                    <ChoiceboxItem defaultValue={"rounded-sm"} onClick={() => {
+                    <ChoiceboxItem defaultValue={DisplayTypeEnum.STYLE1} onClick={() => {
                         if (value == DisplayTypeEnum.STYLE2) {
                             setSeparator("");
                         }

@@ -33,6 +33,8 @@ export interface TestimonialContentContextType {
     setCardBorderWidth: (borderWidth: number) => void;
     cardBorderColor: string;
     setCardBorderColor: (borderColor: string) => void;
+    renderedCardContent: string;
+    setRenderedCardContent: (renderedCardContent: string) => void;
 }
 
 export const TestimonialContentContext = createContext<TestimonialContentContextType | undefined>(undefined);
@@ -57,6 +59,8 @@ export function TestimonialContentProvider({children}) {
     const [cardShadow, setCardShadow] = useState<string>("");
     const [cardBorderWidth, setCardBorderWidth] = useState<number>(0);
     const [cardBorderColor, setCardBorderColor] = useState<string>("");
+
+    const [renderedCardContent, setRenderedCardContent] = useState<string>("");
 
     return (
         <TestimonialContentContext.Provider value={{
@@ -88,6 +92,8 @@ export function TestimonialContentProvider({children}) {
             setCardBorderWidth,
             cardBorderColor,
             setCardBorderColor,
+            renderedCardContent,
+            setRenderedCardContent
         }}>
             {children}
         </TestimonialContentContext.Provider>

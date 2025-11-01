@@ -9,7 +9,7 @@ import ProfilePictureInput from "@/app/(builder)/components/left-sidebar/compone
 
 function LeftSidebar() {
     return (
-        <div className="flex flex-col h-full overflow-y-scroll bg-white p-8 border-r border-gray-200 max-w-1/4 w-full">
+        <div className="flex flex-col h-full lg:overflow-y-scroll bg-white p-8 border-r border-gray-200 w-full">
             <h5 className="mb-6">Content input</h5>
 
             <UsernameInput/>

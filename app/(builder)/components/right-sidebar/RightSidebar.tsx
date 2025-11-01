@@ -11,7 +11,7 @@ import CardBorderInput from "@/app/(builder)/components/right-sidebar/components
 function RightSidebar() {
 
     return (
-        <div className="flex flex-col h-screen bg-white p-8 border-l border-gray-200 max-w-1/4 w-full">
+        <div className="flex flex-col h-full bg-white p-8 sm:max-md:border-none border-l border-gray-200 w-full">
             <h5 className={"mb-6"}>Make it your own</h5>
             <DisplayTypeInput/>
             <CardColorInput/>

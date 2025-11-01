@@ -8,3 +8,11 @@ export function cn(...inputs: ClassValue[]) {
 export const translateBorderWidth = (borderWidth: number) => {
     return `${borderWidth}px`;
 }
+
+export function renderCardStyle(fn, delay) {
+    let timeoutId;
+    return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn(...args), delay);
+    };
+}
