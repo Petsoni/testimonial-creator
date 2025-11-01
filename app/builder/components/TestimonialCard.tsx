@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
-import CardStyle1 from "@/app/(builder)/components/card-styles/CardStyle1";
+import CardStyle1 from "@/app/builder/components/card-styles/CardStyle1";
 import {DisplayTypeEnum} from '@/lib/models/display-type.enum';
 import CardStyle2 from './card-styles/CardStyle2';
 

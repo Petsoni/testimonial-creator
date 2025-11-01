@@ -7,12 +7,12 @@ import {
     IconBorderCornerSquare
 } from "@tabler/icons-react";
 import {Field, FieldLabel} from '@/components/ui/field';
-import {Choicebox, ChoiceboxItem, ChoiceboxItemDescription} from '@/components/ui/shadcn-io/choicebox';
 import {useTestimonialContent} from '@/context/TestimonialContentContext';
+import {Slider} from "@/components/ui/slider";
 
 function CardBorderRadiusInput() {
 
-    const {setCardBorderRadius} = useTestimonialContent();
+    const {setCardBorderRadius, cardBorderRadius} = useTestimonialContent();
 
     const borderRadiusIcon = (cardRadius: string) => {
         switch (cardRadius) {
@@ -29,19 +29,16 @@ function CardBorderRadiusInput() {
 
     return (
         <Field className="mb-4">
-            <FieldLabel htmlFor="cardColor">Border radius</FieldLabel>
-            <Choicebox defaultValue="rounded-md" className={"flex flex-row w-full"}>
-                {Object.entries(CardBorderRadiusEnum).map(([key, value]) => (
-                    <ChoiceboxItem onClick={() => {
-                        setCardBorderRadius(value);
-                    }} key={key} value={value} className={"w-full justify-center"}>
-                        <ChoiceboxItemDescription>
-                            {/*<div className={`w-12 h-8 border-2 ${value}`}></div>*/}
-                            {borderRadiusIcon(value)}
-                        </ChoiceboxItemDescription>
-                    </ChoiceboxItem>
-                ))}
-            </Choicebox>
+            <FieldLabel htmlFor="cardBorderRadius">Border radius</FieldLabel>
+            <Slider defaultValue={[0]}
+                    id={"cardBorderRadius"}
+                    className={"my-3 cursor-pointer"}
+                    step={1}
+                    min={0}
+                    max={56} onValueChange={(value) => {
+                setCardBorderRadius(value[0]);
+            }}/>
+            <p>{cardBorderRadius}px</p>
         </Field>
     );
 }

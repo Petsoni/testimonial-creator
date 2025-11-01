@@ -244,3 +244,20 @@ input[type="color"] {
     background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent thumb */
     border-radius: 5px; /* Rounded corners for thumb */
 }
+
+.capture-screenshot {
+    width: 768px;
+    height: 768px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.watermark {
+    position: absolute;
+    bottom: calc(768px / 4);
+    left: 50%;
+    transform: translateX(-50%);
+}

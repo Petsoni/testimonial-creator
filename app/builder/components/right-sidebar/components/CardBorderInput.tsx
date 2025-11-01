@@ -51,6 +51,7 @@ function CardBorderInput() {
                     <Field className="mb-4">
                         <FieldLabel htmlFor="cardBorderColor">Color</FieldLabel>
                         <input type="color" name="color" id="cardBorderColor"
+                               className={"h-10"}
                                defaultValue={cardBorderColor}
                                onInput={(e) => setCardBorderColor(e.currentTarget.value)}/>
                         <FieldDescription className={"text-gray-600 w-full text-right flex justify-between items-center"}>

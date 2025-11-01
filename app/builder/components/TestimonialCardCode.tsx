@@ -3,8 +3,8 @@
 import {useTestimonialContent} from '@/context/TestimonialContentContext';
 import {DisplayTypeEnum} from '@/lib/models/display-type.enum';
 import reactElementToJSXString from "react-element-to-jsx-string";
-import CardStyle1 from "@/app/(builder)/components/card-styles/CardStyle1";
-import CardStyle2 from "@/app/(builder)/components/card-styles/CardStyle2";
+import CardStyle1 from "@/app/builder/components/card-styles/CardStyle1";
+import CardStyle2 from "@/app/builder/components/card-styles/CardStyle2";
 import {useEffect} from 'react';
 
 function TestimonialCardCode() {

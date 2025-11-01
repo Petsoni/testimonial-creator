@@ -1,14 +1,15 @@
 import {Field, FieldLabel} from '@/components/ui/field';
 import {Label} from '@/components/ui/label';
-import {Choicebox, ChoiceboxItem, ChoiceboxItemDescription} from '@/components/ui/shadcn-io/choicebox';
 import {Switch} from '@/components/ui/switch';
 import {CardShadowEnum} from '@/lib/models/card-shadow.enum';
 import React, {useState} from 'react';
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
+import {Slider} from "@/components/ui/slider";
 
 function CardShadowInput() {
 
     const [showCardShadow, setShowCardShadow] = useState(false);
+    const [cardShadowValue, setCardShadowValue] = useState<number | null>(1);
 
     const {setCardShadow} = useTestimonialContent();
 
@@ -18,6 +19,7 @@ function CardShadowInput() {
                 <Switch id="cardShadowToggle" onCheckedChange={(checked) => {
                     if (checked) {
                         setCardShadow(CardShadowEnum.SMALL);
+                        setCardShadowValue(1);
                     } else {
                         setCardShadow("");
                     }
@@ -28,17 +30,14 @@ function CardShadowInput() {
             {showCardShadow && (
                 <Field className="mb-4">
                     <FieldLabel htmlFor="cardShadowAmount">Spread</FieldLabel>
-                    <Choicebox defaultValue="shadow-sm" className={"flex flex-row w-full"}>
-                        {Object.entries(CardShadowEnum).map(([key, value]) => (
-                            <ChoiceboxItem onClick={() => {
-                                setCardShadow(value);
-                            }} key={key} value={value} className={"w-full justify-center"}>
-                                <ChoiceboxItemDescription>
-                                    {key.toUpperCase()}
-                                </ChoiceboxItemDescription>
-                            </ChoiceboxItem>
-                        ))}
-                    </Choicebox>
+                    <Slider defaultValue={[0]}
+                            className={"mt-3 cursor-pointer"}
+                            step={1}
+                            max={Object.entries(CardShadowEnum).length - 1} onValueChange={(value) => {
+                        setCardShadow(Object.values(CardShadowEnum)[value[0]]);
+                        setCardShadowValue(value[0] + 1)
+                    }}/>
+                    <p>{cardShadowValue}</p>
                 </Field>
             )}
         </>

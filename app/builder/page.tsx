@@ -1,4 +1,4 @@
-import DesktopLayout from "@/app/(builder)/components/DesktopLayout";
+import DesktopScreenshotLayout from "./components/DesktopScreenshotLayout";
 
 export default function Home() {
 
@@ -9,7 +9,7 @@ export default function Home() {
                 <h3 className={"w-full text-center"}>Customization on desktop is easier, trust me 😉</h3>
             </div>
             <div className={"hidden lg:block"}>
-                <DesktopLayout/>
+                <DesktopScreenshotLayout/>
             </div>
         </main>
     );

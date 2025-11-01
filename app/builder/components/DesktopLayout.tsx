@@ -1,23 +1,27 @@
+"use client";
+
 import React from 'react';
-import TestimonialCard from "@/app/(builder)/components/TestimonialCard";
+import TestimonialCard from "@/app/builder/components/TestimonialCard";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {IconCode, IconEye} from "@tabler/icons-react";
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
-import TestimonialCardCode from "@/app/(builder)/components/TestimonialCardCode";
+import TestimonialCardCode from "@/app/builder/components/TestimonialCardCode";
 import {CopyButton} from "@/components/ui/shadcn-io/copy-button";
 import {motion} from "motion/react";
 import {fadeUpVariant} from "@/lib/variants";
-import RightSidebar from './right-sidebar/RightSidebar';
 import LeftSidebar from './left-sidebar/LeftSidebar';
+import RightSidebar from './right-sidebar/RightSidebar';
 
-function MobileLayout() {
+function DesktopLayout() {
+
     const {setProfilePicturePreview, renderedCardContent} = useTestimonialContent()
 
     return (
-        <div className={"flex flex-col w-full h-screen"}>
-            <LeftSidebar/>
-            <RightSidebar/>
-            <section className={"w-[100dvw] flex flex-col items-center justify-between"}>
+        <div className={"flex flex-row h-screen"}>
+            <div className="w-1/3 lg:max-w-1/3 hidden lg:block">
+                <LeftSidebar/>
+            </div>
+            <section className={"w-full flex flex-col items-center justify-between"}>
                 <div></div>
                 <Tabs className={"lg:min-w-[40rem]"} defaultValue={"preview"} onValueChange={(value) => {
                     if (value == 'code') {
@@ -61,8 +65,11 @@ function MobileLayout() {
                     <a className={'text-blue-600'} href="https://x.com/petsoni_"> Petsoni</a>
                 </p>
             </section>
+            <div className="w-1/3 lg:max-w-1/3 hidden lg:block">
+                <RightSidebar/>
+            </div>
         </div>
     );
 }
 
-export default MobileLayout;
+export default DesktopLayout;

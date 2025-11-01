@@ -4,6 +4,7 @@ import React, {createContext, useContext, useState} from "react";
 import {DisplayTypeEnum} from "@/lib/models/display-type.enum";
 
 export interface TestimonialContentContextType {
+    // Left sidebar
     username: string;
     setUsername: (username: string) => void;
     usernameColor: string;
@@ -18,15 +19,17 @@ export interface TestimonialContentContextType {
     setSeparator: (separator: string) => void;
     profilePicturePreview: string | undefined;
     setProfilePicturePreview: (imageString: string) => void;
-    imageBorderRadius: string;
-    setImageBorderRadius: (borderRadius: string) => void;
+    imageBorderRadius: number;
+    setImageBorderRadius: (borderRadius: number) => void;
 
+    // Right sidebar
     displayType: DisplayTypeEnum;
     setDisplayType: (displayType: DisplayTypeEnum) => void;
     cardColor: string;
     setCardColor: (color: string) => void;
-    cardBorderRadius: string;
-    setCardBorderRadius: (borderRadius: string) => void;
+    cardBorderRadius: number;
+    setCardBorderRadius: (borderRadius: number) => void;
+    // setCardBorderRadiusClass: (borderRadius: number) => void;
     cardShadow: string;
     setCardShadow: (shadow: string) => void;
     cardBorderWidth: number;
@@ -50,12 +53,12 @@ export function TestimonialContentProvider({children}) {
     const [testimonialText, setTestimonialText] = useState("");
     const [separator, setSeparator] = useState("");
     const [profilePicturePreview, setProfilePicturePreview] = useState<string | undefined>();
-    const [imageBorderRadius, setImageBorderRadius] = useState<string>("rounded-full");
+    const [imageBorderRadius, setImageBorderRadius] = useState<number>(0);
 
     // Right sidebar
     const [displayType, setDisplayType] = useState(DisplayTypeEnum.STYLE1);
     const [cardColor, setCardColor] = useState("#FFFFFF");
-    const [cardBorderRadius, setCardBorderRadius] = useState<string>("rounded-sm");
+    const [cardBorderRadius, setCardBorderRadius] = useState<number>(0);
     const [cardShadow, setCardShadow] = useState<string>("");
     const [cardBorderWidth, setCardBorderWidth] = useState<number>(0);
     const [cardBorderColor, setCardBorderColor] = useState<string>("");
