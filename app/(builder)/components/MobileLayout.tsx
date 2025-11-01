@@ -10,7 +10,7 @@ import {fadeUpVariant} from "@/lib/variants";
 import RightSidebar from './right-sidebar/RightSidebar';
 import LeftSidebar from './left-sidebar/LeftSidebar';
 
-function MobileLayout(props) {
+function MobileLayout() {
     const {setProfilePicturePreview, renderedCardContent} = useTestimonialContent()
 
     return (

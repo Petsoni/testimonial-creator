@@ -1,9 +1,11 @@
+"use client";
+
 import {useTestimonialContent} from '@/context/TestimonialContentContext';
 import {DisplayTypeEnum} from '@/lib/models/display-type.enum';
 import reactElementToJSXString from "react-element-to-jsx-string";
 import CardStyle1 from "@/app/(builder)/components/card-styles/CardStyle1";
 import CardStyle2 from "@/app/(builder)/components/card-styles/CardStyle2";
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 
 function TestimonialCardCode() {
     const testimonialContextProps = useTestimonialContent();
@@ -33,6 +35,7 @@ function TestimonialCardCode() {
             return reactElementToJSXString(CardStyle2({cardProps: testimonialContextProps}));
         default:
             return null;
-    }}
+    }
+}
 
 export default TestimonialCardCode;

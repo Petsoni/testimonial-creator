@@ -1,13 +1,32 @@
 import {Field, FieldLabel} from '@/components/ui/field';
 import {Choicebox, ChoiceboxItem, ChoiceboxItemDescription} from '@/components/ui/shadcn-io/choicebox';
-import {BorderRadiusEnum} from '@/lib/models/border-radius.enum';
+import {BorderRadiusEnum, CardBorderRadiusEnum} from '@/lib/models/border-radius.enum';
 import React, {useState} from 'react';
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
+import {
+    IconBorderCornerIos,
+    IconBorderCornerPill,
+    IconBorderCornerRounded,
+    IconBorderCornerSquare
+} from "@tabler/icons-react";
 
 function ProfilePictureInput() {
     const [files, setFiles] = useState<File[] | undefined>();
 
     const {setProfilePicturePreview, setImageBorderRadius} = useTestimonialContent();
+
+    const borderRadiusIcon = (cardRadius: string) => {
+        switch (cardRadius) {
+            case BorderRadiusEnum.NONE:
+                return <IconBorderCornerSquare/>
+            case BorderRadiusEnum.SMALL:
+                return <IconBorderCornerRounded/>
+            case BorderRadiusEnum.MEDIUM:
+                return <IconBorderCornerIos/>
+            case BorderRadiusEnum.FULL:
+                return <IconBorderCornerPill/>
+        }
+    }
 
     const handleDrop = (files: File[]) => {
         setFiles(files);
@@ -22,7 +41,6 @@ function ProfilePictureInput() {
             reader.readAsDataURL(files[0]);
         }
     };
-
 
     return (
         <Field className="mb-4">
@@ -53,13 +71,14 @@ function ProfilePictureInput() {
             {/*        ))}*/}
             {/*    </Choicebox>*/}
             {/*)}*/}
-            <Choicebox defaultValue="rounded-xs" className={"flex flex-row w-full"}>
+            <Choicebox defaultValue="rounded-full" className={"flex flex-row w-full"}>
                 {Object.entries(BorderRadiusEnum).map(([key, value]) => (
                     <ChoiceboxItem onClick={() => {
                         setImageBorderRadius(value);
                     }} key={key} value={value} className={"w-full justify-center"}>
                         <ChoiceboxItemDescription>
-                            <div className={`lg:w-10 lg:h-10 w-5 h-5 border-2 ${value}`}></div>
+                            {/*<div className={`lg:w-10 lg:h-10 w-5 h-5 border-2 ${value}`}></div>*/}
+                            {borderRadiusIcon(value)}
                         </ChoiceboxItemDescription>
                     </ChoiceboxItem>
                 ))}

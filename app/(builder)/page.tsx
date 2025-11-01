@@ -1,14 +1,12 @@
-"use client";
-
 import DesktopLayout from "@/app/(builder)/components/DesktopLayout";
-import MobileLayout from "@/app/(builder)/components/MobileLayout";
 
 export default function Home() {
 
     return (
         <main>
-            <div className={"block lg:hidden"}>
-                <MobileLayout/>
+            <div className={"h-[100dvh] flex items-center lg:hidden"}>
+                {/*<MobileLayout/>*/}
+                <h3 className={"w-full text-center"}>Customization on desktop is easier, trust me 😉</h3>
             </div>
             <div className={"hidden lg:block"}>
                 <DesktopLayout/>

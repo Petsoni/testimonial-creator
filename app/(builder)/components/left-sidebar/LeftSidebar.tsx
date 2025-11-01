@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import UsernameInput from '@/app/(builder)/components/left-sidebar/components/UsernameInput';
 import FirmInput from '@/app/(builder)/components/left-sidebar/components/FirmInput';

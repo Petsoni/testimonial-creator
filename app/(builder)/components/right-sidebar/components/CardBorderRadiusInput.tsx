@@ -30,14 +30,14 @@ function CardBorderRadiusInput() {
     return (
         <Field className="mb-4">
             <FieldLabel htmlFor="cardColor">Border radius</FieldLabel>
-            <Choicebox defaultValue="2xl" className={"flex flex-row w-full"}>
+            <Choicebox defaultValue="rounded-md" className={"flex flex-row w-full"}>
                 {Object.entries(CardBorderRadiusEnum).map(([key, value]) => (
-                    <ChoiceboxItem defaultValue={"rounded-sm"} onClick={() => {
+                    <ChoiceboxItem onClick={() => {
                         setCardBorderRadius(value);
                     }} key={key} value={value} className={"w-full justify-center"}>
                         <ChoiceboxItemDescription>
-                            <div className={`w-12 h-8 border-2 ${value}`}></div>
-                            {/*{borderRadiusIcon(value)}*/}
+                            {/*<div className={`w-12 h-8 border-2 ${value}`}></div>*/}
+                            {borderRadiusIcon(value)}
                         </ChoiceboxItemDescription>
                     </ChoiceboxItem>
                 ))}

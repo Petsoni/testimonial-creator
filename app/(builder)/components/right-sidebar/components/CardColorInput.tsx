@@ -12,7 +12,7 @@ function CardColorInput() {
             <input type="color" name="color" id="cardColor" className={"h-10 w-full relative"}
                    defaultValue={cardColor}
                    onInput={(e) => setCardColor(e.currentTarget.value)}/>
-            <FieldDescription className={"text-gray-500w-full text-right flex justify-between items-center"}>
+            <FieldDescription className={"text-gray-600 w-full text-right flex justify-between items-center"}>
                 <span>Hex:</span>
                 {cardColor}
             </FieldDescription>

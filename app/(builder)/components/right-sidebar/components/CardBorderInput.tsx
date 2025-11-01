@@ -53,7 +53,10 @@ function CardBorderInput() {
                         <input type="color" name="color" id="cardBorderColor"
                                defaultValue={cardBorderColor}
                                onInput={(e) => setCardBorderColor(e.currentTarget.value)}/>
-                        <FieldDescription className={"text-gray-500"}>{cardBorderColor}</FieldDescription>
+                        <FieldDescription className={"text-gray-600 w-full text-right flex justify-between items-center"}>
+                            <span>Hex:</span>
+                            {cardBorderColor}
+                        </FieldDescription>
                     </Field>
                 </>
             )}

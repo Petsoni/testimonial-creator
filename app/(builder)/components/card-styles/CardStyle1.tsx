@@ -1,6 +1,5 @@
 import React from 'react';
 import {TestimonialContentContextType} from "@/context/TestimonialContentContext";
-import {Skeleton} from '@/components/ui/skeleton';
 import {translateBorderWidth} from "@/lib/utils";
 
 function CardStyle1({cardProps}: { cardProps: Partial<TestimonialContentContextType> }) {
@@ -27,45 +26,64 @@ function CardStyle1({cardProps}: { cardProps: Partial<TestimonialContentContextT
                  src={"petsoni-profile.webp"}
                  alt={cardProps.username + " profile image"}/>
             <div className="flex flex-col justify-between items-start">
-                {cardProps.testimonialText != ''
-                    ? (
-                        <p className={"mb-8 wrap-break-word"}>{cardProps.testimonialText}</p>
-                    )
-                    : (
-                        <div className={"flex flex-col gap-2"}>
-                            {/*<Skeleton className={"w-full h-3"}/>*/}
-                            {/*<Skeleton className={"w-full h-3"}/>*/}
-                            {/*<Skeleton className={"w-full h-3"}/>*/}
-                        </div>
-                    )
-                }
-
-                {cardProps.username != '' || cardProps.userFirm != '' ? (
-                    <p className={"bold-text"}
-                       style={{
-                           color: cardProps.usernameColor
-                       }}>
-                        {cardProps.username}
-                        <span className={"text-[#454545]"}> {cardProps.separator} </span>
-                        {cardProps.userFirmLink != ""
-                            ? (
-                                <a href={cardProps.userFirmLink} target={"_blank"}
-                                   className={cardProps.userFirmLink != '' ? 'underline' : ''}>
-                                    {cardProps.userFirm}
-                                </a>
-                            ) : (
-                                <span className={"text-[#454545]"}>
+                <p className={"mb-8 wrap-break-word"}>{cardProps.testimonialText}</p>
+                {/*{cardProps.testimonialText != ''*/}
+                {/*    ? (*/}
+                {/*        <p className={"mb-8 wrap-break-word"}>{cardProps.testimonialText}</p>*/}
+                {/*    )*/}
+                {/*    : (*/}
+                {/*        <div className={"flex flex-col gap-2"}>*/}
+                {/*            /!*<Skeleton className={"w-full h-3"}/>*!/*/}
+                {/*            /!*<Skeleton className={"w-full h-3"}/>*!/*/}
+                {/*            /!*<Skeleton className={"w-full h-3"}/>*!/*/}
+                {/*        </div>*/}
+                {/*    )*/}
+                {/*}*/}
+                <p className={"bold-text"}
+                   style={{
+                       color: cardProps.usernameColor
+                   }}>
+                    {cardProps.username}
+                    <span className={"text-[#454545]"}> {cardProps.separator} </span>
+                    {cardProps.userFirmLink != ""
+                        ? (
+                            <a href={cardProps.userFirmLink} target={"_blank"}
+                               className={cardProps.userFirmLink != '' ? 'underline' : ''}>
+                                {cardProps.userFirm}
+                            </a>
+                        ) : (
+                            <span className={"text-[#454545]"}>
                                     {cardProps.userFirm}
                                 </span>
-                            )
-                        }
-                    </p>
-                ) : (
-                    <div className={"flex flex-row gap-2"}>
-                        {/*<Skeleton className={"w-40 h-3"}/>*/}
-                        {/*<Skeleton className={"w-20 h-3"}/>*/}
-                    </div>
-                )}
+                        )
+                    }
+                </p>
+                {/*{cardProps.username != '' || cardProps.userFirm != '' ? (*/}
+                {/*    <p className={"bold-text"}*/}
+                {/*       style={{*/}
+                {/*           color: cardProps.usernameColor*/}
+                {/*       }}>*/}
+                {/*        {cardProps.username}*/}
+                {/*        <span className={"text-[#454545]"}> {cardProps.separator} </span>*/}
+                {/*        {cardProps.userFirmLink != ""*/}
+                {/*            ? (*/}
+                {/*                <a href={cardProps.userFirmLink} target={"_blank"}*/}
+                {/*                   className={cardProps.userFirmLink != '' ? 'underline' : ''}>*/}
+                {/*                    {cardProps.userFirm}*/}
+                {/*                </a>*/}
+                {/*            ) : (*/}
+                {/*                <span className={"text-[#454545]"}>*/}
+                {/*                    {cardProps.userFirm}*/}
+                {/*                </span>*/}
+                {/*            )*/}
+                {/*        }*/}
+                {/*    </p>*/}
+                {/*) : (*/}
+                {/*    <div className={"flex flex-row gap-2"}>*/}
+                {/*        /!*<Skeleton className={"w-40 h-3"}/>*!/*/}
+                {/*        /!*<Skeleton className={"w-20 h-3"}/>*!/*/}
+                {/*    </div>*/}
+                {/*)}*/}
             </div>
         </div>
     );

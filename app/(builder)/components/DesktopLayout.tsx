@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import TestimonialCard from "@/app/(builder)/components/TestimonialCard";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";

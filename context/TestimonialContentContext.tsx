@@ -50,7 +50,7 @@ export function TestimonialContentProvider({children}) {
     const [testimonialText, setTestimonialText] = useState("");
     const [separator, setSeparator] = useState("");
     const [profilePicturePreview, setProfilePicturePreview] = useState<string | undefined>();
-    const [imageBorderRadius, setImageBorderRadius] = useState<string>("2xl");
+    const [imageBorderRadius, setImageBorderRadius] = useState<string>("rounded-full");
 
     // Right sidebar
     const [displayType, setDisplayType] = useState(DisplayTypeEnum.STYLE1);

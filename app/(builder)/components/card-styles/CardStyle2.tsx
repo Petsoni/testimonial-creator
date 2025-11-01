@@ -1,6 +1,5 @@
 import React from 'react';
 import {TestimonialContentContextType} from "@/context/TestimonialContentContext";
-import {Skeleton} from '@/components/ui/skeleton';
 import {translateBorderWidth} from "@/lib/utils";
 
 function CardStyle2({cardProps}: { cardProps: Partial<TestimonialContentContextType> }) {
@@ -26,37 +25,46 @@ function CardStyle2({cardProps}: { cardProps: Partial<TestimonialContentContextT
                      className={`w-full border-2 max-w-14 object-cover h-14 ${cardProps.imageBorderRadius}`}
                      src={"petsoni-profile.webp"}
                      alt={cardProps.username + " profile image"}/>
-                {cardProps.username != '' || cardProps.userFirm != '' ? (
-                    <div className="flex flex-col gap-2">
-                        <p className={"bold-text"} style={{
-                            color: cardProps.usernameColor
-                        }}>{cardProps.username} {cardProps.separator + " "}</p>
-                        <a href={cardProps.userFirmLink} target={"_blank"}
-                           className={cardProps.userFirmLink != '' ? 'underline' : ''}>
-                            {cardProps.userFirm}
-                        </a>
-                    </div>
-                ) : (
-                    <div className={"flex flex-col gap-2"}>
-                        <Skeleton className={"w-40 h-3"}/>
-                        <Skeleton className={"w-20 h-3"}/>
-                    </div>
-                )}
+                <div className="flex flex-col gap-2">
+                    <p className={"bold-text"} style={{
+                        color: cardProps.usernameColor
+                    }}>{cardProps.username} {cardProps.separator + " "}</p>
+                    <a href={cardProps.userFirmLink} target={"_blank"}
+                       className={cardProps.userFirmLink != '' ? 'underline' : ''}>
+                        {cardProps.userFirm}
+                    </a>
+                </div>
+                {/*{cardProps.username != '' || cardProps.userFirm != '' ? (*/}
+                {/*    <div className="flex flex-col gap-2">*/}
+                {/*        <p className={"bold-text"} style={{*/}
+                {/*            color: cardProps.usernameColor*/}
+                {/*        }}>{cardProps.username} {cardProps.separator + " "}</p>*/}
+                {/*        <a href={cardProps.userFirmLink} target={"_blank"}*/}
+                {/*           className={cardProps.userFirmLink != '' ? 'underline' : ''}>*/}
+                {/*            {cardProps.userFirm}*/}
+                {/*        </a>*/}
+                {/*    </div>*/}
+                {/*) : (*/}
+                {/*    <div className={"flex flex-col gap-2"}>*/}
+                {/*        <Skeleton className={"w-40 h-3"}/>*/}
+                {/*        <Skeleton className={"w-20 h-3"}/>*/}
+                {/*    </div>*/}
+                {/*)}*/}
             </div>
             <div className="flex flex-col items-start">
-                {cardProps.testimonialText != ''
-                    ? (
-                        <p className={"wrap-break-word"}>{cardProps.testimonialText}</p>
-                    )
-                    : (
-                        <div className={"flex flex-col gap-2"}>
-                            <Skeleton className={"w-100 h-3"}/>
-                            <Skeleton className={"w-100 h-3"}/>
-                            <Skeleton className={"w-100 h-3"}/>
-                        </div>
-                    )
-                }
-
+                <p className={"wrap-break-word"}>{cardProps.testimonialText}</p>
+                {/*{cardProps.testimonialText != ''*/}
+                {/*    ? (*/}
+                {/*        <p className={"wrap-break-word"}>{cardProps.testimonialText}</p>*/}
+                {/*    )*/}
+                {/*    : (*/}
+                {/*        <div className={"flex flex-col gap-2"}>*/}
+                {/*            <Skeleton className={"w-100 h-3"}/>*/}
+                {/*            <Skeleton className={"w-100 h-3"}/>*/}
+                {/*            <Skeleton className={"w-100 h-3"}/>*/}
+                {/*        </div>*/}
+                {/*    )*/}
+                {/*}*/}
             </div>
         </div>
     );
