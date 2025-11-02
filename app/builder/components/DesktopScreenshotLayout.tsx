@@ -13,7 +13,7 @@ import {IconDownload} from "@tabler/icons-react";
 
 function DesktopScreenshotLayout() {
 
-    const {cardColor} = useTestimonialContent()
+    const {cardColor, username, userFirm} = useTestimonialContent()
 
     return (
         <div className={"flex flex-row h-screen"}>
@@ -34,7 +34,7 @@ function DesktopScreenshotLayout() {
                             <TestimonialCard/>
                         </div>
                     </motion.div>
-                    <Button className={"w-fit"} onClick={() => captureScreenshot(cardColor)}>
+                    <Button className={"w-fit"} onClick={() => captureScreenshot(cardColor, username, userFirm)}>
                         <IconDownload/>
                         Download
                     </Button>
