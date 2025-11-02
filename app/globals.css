@@ -164,6 +164,13 @@ textarea {
     resize: vertical;
 }
 
+.landing-text {
+    font-size: clamp(2rem, 5vw + 1rem, 4rem);
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
 h1 {
     font-size: clamp(2rem, 4vw + 1rem, 3rem);
     line-height: 1.2;
@@ -268,6 +275,11 @@ input[type="color"]::-moz-color-swatch {
     bottom: calc(768px / 4);
     left: 50%;
     transform: translateX(-50%);
+}
+
+.landing-page {
+    background: url("../public/landing.png") no-repeat center center fixed;
+    background-size: cover;
 }
 
 .card-default {

@@ -21,7 +21,7 @@ function DesktopScreenshotLayout() {
                 <LeftSidebar/>
             </div>
             <section className={"w-full flex flex-col items-center justify-between"} style={{
-                background: `linear-gradient(45deg, oklch(from ${cardColor} calc(l - -1) c h) 25%, oklch(from ${cardColor} calc(l - 0.15) c h))`
+                background: `linear-gradient(135deg, oklch(from ${cardColor} calc(l - -1) c h) 25%, oklch(from ${cardColor} calc(l - 0.25) c h))`
             }}>
                 <div></div>
                 <div className="flex flex-col gap-6 items-center">

@@ -1,6 +1,6 @@
 import DesktopScreenshotLayout from "./components/DesktopScreenshotLayout";
 
-export default function Home() {
+export default function Builder() {
 
     return (
         <main>

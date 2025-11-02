@@ -20,7 +20,7 @@ function CardStyle1({cardProps}: { cardProps: Partial<TestimonialContentContextT
                        className={`w-full border-2 max-w-14 object-cover h-14`}
                        style={{
                            borderRadius: `${cardProps.imageBorderRadius}px`,
-                           borderColor: `oklch(from ${cardProps.usernameColor} calc(l - -0.25) c h)`,
+                           borderColor: cardProps.cardBorderColor,
                        }}
                        src={cardProps.profilePicturePreview}
                        alt={cardProps.username + " profile image"}/>
