@@ -12,8 +12,8 @@ function FirmInput() {
             <FieldLabel htmlFor="userCorp">From</FieldLabel>
             <Input id="userCorp" type="text" placeholder="Corporation name"
                    onInput={(e) => setUserFirm(e.currentTarget.value)}/>
-            <Input id="userCorpLink" type="text" placeholder="Link"
-                   onInput={(e) => setUserFirmLink(e.currentTarget.value)}/>
+            {/*<Input id="userCorpLink" type="text" placeholder="Link"*/}
+            {/*       onInput={(e) => setUserFirmLink(e.currentTarget.value)}/>*/}
         </Field>
     );
 }

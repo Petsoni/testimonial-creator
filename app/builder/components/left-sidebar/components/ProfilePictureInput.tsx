@@ -62,7 +62,7 @@ function ProfilePictureInput() {
                 className={"mb-2"}
             >
                 <DropzoneEmptyState/>
-                <DropzoneContent/>
+                <DropzoneContent className="text-ellipsis whitespace-nowrap max-w-50"/>
             </Dropzone>
             {profilePicturePreview && (
                 <Field className="mt-4">

@@ -7,7 +7,7 @@ import Image from "next/image";
 function CardStyle1({cardProps}: { cardProps: Partial<TestimonialContentContextType> }) {
     return (
         <div
-            className={`flex flex-row gap-4 ${cardProps.cardShadow} max-w-[90dvw] lg:max-w-[35rem] min-w-[30rem] min-h-[10rem] p-6`}
+            className={`card-default flex flex-row gap-4 ${cardProps.cardShadow} max-w-[90dvw] lg:max-w-[35rem]`}
             style={{
                 borderRadius: `${cardProps.cardBorderRadius}px`,
                 background: cardProps.cardColor,
@@ -20,6 +20,7 @@ function CardStyle1({cardProps}: { cardProps: Partial<TestimonialContentContextT
                        className={`w-full border-2 max-w-14 object-cover h-14`}
                        style={{
                            borderRadius: `${cardProps.imageBorderRadius}px`,
+                           borderColor: `oklch(from ${cardProps.usernameColor} calc(l - -0.25) c h)`,
                        }}
                        src={cardProps.profilePicturePreview}
                        alt={cardProps.username + " profile image"}/>

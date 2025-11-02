@@ -9,7 +9,7 @@ function CardColorInput() {
     return (
         <Field className="mb-4 relative">
             <FieldLabel htmlFor="cardColor">Color</FieldLabel>
-            <input type="color" name="color" id="cardColor" className={"h-10 w-full relative"}
+            <input type="color" name="color" id="cardColor" className={"h-10 w-full relative rounded-md"}
                    defaultValue={cardColor}
                    onInput={(e) => setCardColor(e.currentTarget.value)}/>
             <FieldDescription className={"text-gray-600 w-full text-right flex justify-between items-center"}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {CardBorderRadiusEnum} from "@/lib/models/border-radius.enum";
 import {
     IconBorderCornerIos,
@@ -13,6 +13,7 @@ import {Slider} from "@/components/ui/slider";
 function CardBorderRadiusInput() {
 
     const {setCardBorderRadius, cardBorderRadius} = useTestimonialContent();
+    const [stateBorderRadius, setStateBorderRadius] = useState<number[]>([16])
 
     const borderRadiusIcon = (cardRadius: string) => {
         switch (cardRadius) {
@@ -35,9 +36,12 @@ function CardBorderRadiusInput() {
                     className={"my-3 cursor-pointer"}
                     step={1}
                     min={0}
-                    max={56} onValueChange={(value) => {
-                setCardBorderRadius(value[0]);
-            }}/>
+                    max={56}
+                    value={stateBorderRadius}
+                    onValueChange={(value) => {
+                        setCardBorderRadius(value[0]);
+                        setStateBorderRadius([value[0]])
+                    }}/>
             <p>{cardBorderRadius}px</p>
         </Field>
     );

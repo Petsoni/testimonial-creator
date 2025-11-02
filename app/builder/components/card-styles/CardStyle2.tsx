@@ -7,7 +7,7 @@ import {Skeleton} from "@/components/ui/skeleton";
 function CardStyle2({cardProps}: { cardProps: Partial<TestimonialContentContextType> }) {
     return (
         <div
-            className={`flex flex-col gap-4 ${cardProps.cardShadow} max-w-[35rem] min-w-[30rem] min-h-[10rem] p-6 ${cardProps.cardBorderRadius}`}
+            className={`card-default flex-col max-w-[90dvw] lg:max-w-[35rem] ${cardProps.cardShadow} ${cardProps.cardBorderRadius}`}
             style={{
                 borderRadius: `${cardProps.cardBorderRadius}px`,
                 background: cardProps.cardColor,
@@ -32,10 +32,21 @@ function CardStyle2({cardProps}: { cardProps: Partial<TestimonialContentContextT
                         <p className={"bold-text"} style={{
                             color: cardProps.usernameColor
                         }}>{cardProps.username} {cardProps.separator + " "}</p>
-                        <a href={cardProps.userFirmLink} target={"_blank"}
-                           className={cardProps.userFirmLink != '' ? 'underline' : ''}>
-                            {cardProps.userFirm}
-                        </a>
+                        {cardProps.userFirmLink != ""
+                            ? (
+                                <a href={cardProps.userFirmLink} target={"_blank"}
+                                   style={{
+                                       textDecorationColor: cardProps.usernameColor
+                                   }}
+                                   className={cardProps.userFirmLink != '' ? 'underline text-[#454545]' : ''}>
+                                    {cardProps.userFirm}
+                                </a>
+                            ) : (
+                                <span className={"text-[#454545]!"}>
+                                    {cardProps.userFirm}
+                                </span>
+                            )
+                        }
                     </div>
                 ) : (
                     <div className={"flex flex-col gap-2"}>

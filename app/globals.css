@@ -207,7 +207,7 @@ p {
     line-height: 1.6;
 }
 
-p, a, li, label, input, textarea {
+p, a, li, label, input, textarea, span {
     font-size: 15px !important;
 }
 
@@ -220,13 +220,21 @@ li, strong {
 }
 
 input[type="color"] {
-    appearance: none;
-    -moz-appearance: none;
     -webkit-appearance: none;
-    background: none;
-    border: 0;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-    padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+    border-radius: 8px;
+    border: 1px solid var(--gray-200);
+    padding: 2px;
+}
+input[type="color"]::-moz-color-swatch {
+    border: none;
+    padding: 2px;
 }
 
 ::-webkit-scrollbar {
@@ -260,4 +268,13 @@ input[type="color"] {
     bottom: calc(768px / 4);
     left: 50%;
     transform: translateX(-50%);
+}
+
+.card-default {
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    max-width: 35rem;
+    min-width: 30rem;
+    min-height: 10rem;
 }

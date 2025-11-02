@@ -58,7 +58,7 @@ export function TestimonialContentProvider({children}) {
     // Right sidebar
     const [displayType, setDisplayType] = useState(DisplayTypeEnum.STYLE1);
     const [cardColor, setCardColor] = useState("#FFFFFF");
-    const [cardBorderRadius, setCardBorderRadius] = useState<number>(0);
+    const [cardBorderRadius, setCardBorderRadius] = useState<number>(16);
     const [cardShadow, setCardShadow] = useState<string>("");
     const [cardBorderWidth, setCardBorderWidth] = useState<number>(0);
     const [cardBorderColor, setCardBorderColor] = useState<string>("");
