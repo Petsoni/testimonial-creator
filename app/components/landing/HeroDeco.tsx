@@ -1,45 +1,30 @@
 "use client";
 
-import React, {type ReactNode, useMemo} from "react";
-import Image from "next/image";
+import React, {type ReactNode} from "react";
 import {motion} from "motion/react";
-import {createAvatar} from "@dicebear/core";
-import {notionists} from "@dicebear/collection";
+import ExportFrame from "@/app/components/landing/ExportFrame";
+import {exampleTestimonials} from "@/app/components/landing/example-testimonials";
 import {BACKDROPS, backdropGradient, cardTint, findBackdrop} from "@/lib/backdrops";
 import {duration, ease} from "@/lib/motion";
-import {ARTBOARD_SIZE, EXPORT_SCALE} from "@/lib/screenshot-service";
 import {cn} from "@/lib/utils";
 
 /*
  * Decoration for the landing hero, after Relume's: pieces of the product float at the edges.
- * The left side writes a testimonial, the right styles and exports it. All of it is aria-hidden;
- * the hero copy already says what the product does.
+ * The left side writes a testimonial, the right styles and exports one. The cards are real
+ * exports (ExportFrame), the same as the use cases further down. All of it is aria-hidden; the
+ * hero copy already says what the product does.
  */
 
-const EXPORT_SIZE = ARTBOARD_SIZE * EXPORT_SCALE;
+// ARTBOARD_SIZE × EXPORT_SCALE in lib/screenshot-service, kept local so the landing page doesn't load html2canvas.
+const EXPORT_SIZE = 1536;
 
-type Sample = { name: string; company: string; quote: string; seed: string; backdrop: string };
+const writing = exampleTestimonials.leo;
+const exporting = exampleTestimonials.daniel;
 
-const LEO: Sample = {
-    name: "Leo Martins",
-    company: "Design lead, Kiln Studio",
-    quote: "Clean, fast, and the PNGs drop straight into our pricing page. No more screenshotting tweets.",
-    seed: "Leo",
-    backdrop: "lavender",
-};
+// What the Write panel shows mid-typing: the first sentence of the quote.
+const TYPED = writing.testimonialText.slice(0, writing.testimonialText.indexOf(".") + 1);
 
-const MAYA: Sample = {
-    name: "Maya Okafor",
-    company: "Head of Growth, Fieldnote",
-    quote: "We swapped our logo wall for three of these. Trial signups from that page are up 18%.",
-    seed: "Maya",
-    backdrop: "sage",
-};
-
-// What the Write panel shows mid-typing: the first sentence of Leo's quote.
-const TYPED = LEO.quote.slice(0, LEO.quote.indexOf(".") + 1);
-
-const enter = (delay: number, x = 0) => ({
+const enter = (delay: number, x: number) => ({
     initial: {opacity: 0, x},
     animate: {opacity: 1, x: 0},
     transition: {delay, duration: duration.slow, ease: ease.out},
@@ -55,42 +40,13 @@ function Caption({step, children}: { step: string; children: ReactNode }) {
     );
 }
 
-/** A finished card on its backdrop: a small copy of what the builder exports. */
-function SampleTile({sample}: { sample: Sample }) {
-    const backdrop = findBackdrop(sample.backdrop);
-    const avatar = useMemo(
-        () => createAvatar(notionists, {seed: sample.seed, backgroundColor: ["c0aede", "d1d4f9", "b6e3f4"]}).toDataUri(),
-        [sample.seed],
-    );
-
-    return (
-        <div
-            className="flex aspect-square w-full items-center justify-center p-[9%] ring-1 ring-rule"
-            style={{background: backdropGradient(backdrop)}}
-        >
-            <div className="w-full rounded-[9px] p-3 shadow-md" style={{background: cardTint(backdrop), color: "oklch(0.39 0 0)"}}>
-                <div className="flex gap-2.5">
-                    <Image src={avatar} alt="" width={28} height={28} className="size-7 shrink-0 rounded-full"/>
-                    <div className="flex min-w-0 flex-col gap-2.5">
-                        <p className="text-[11px] leading-[1.5] font-medium tracking-[-0.01em]">{sample.quote}</p>
-                        <p className="truncate text-[10px] leading-none">
-                            <span className="font-semibold" style={{color: backdrop.accent}}>{sample.name}</span>
-                            <span className="text-[#454545]"> · {sample.company}</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
 /** The builder's content fields, caught mid-sentence. */
 function WritePanel() {
     return (
         <div className="w-[260px] border border-rule bg-background">
             <div className="border-b border-rule-soft p-3">
                 <div className="mb-1.5 font-mono text-[10px] leading-none tracking-[0.05em] text-ink-2 uppercase">Name</div>
-                <div className="flex h-7 items-center rounded-sm border border-rule px-2 text-xs">{LEO.name}</div>
+                <div className="flex h-7 items-center rounded-sm border border-rule px-2 text-xs">{writing.username}</div>
             </div>
             <div className="p-3">
                 <div className="mb-1.5 flex justify-between font-mono text-[10px] leading-none tracking-[0.05em] uppercase">
@@ -125,13 +81,15 @@ function Cursor({label, className, delay}: { label: string; className?: string; 
     );
 }
 
-/** The Background picker with Sage chosen and a cursor resting on it. */
+/** The Background picker with the exported card's backdrop chosen and a cursor resting on it. */
 function StylePanel() {
+    const chosen = findBackdrop(exporting.backdropId);
+
     return (
         <div className="w-[236px] border border-rule bg-background p-3">
             <div className="mb-2 flex items-baseline justify-between font-mono text-[10px] leading-none tracking-[0.05em]">
                 <span className="text-ink-2 uppercase">Background</span>
-                <span className="text-muted-foreground">Sage</span>
+                <span className="text-muted-foreground">{chosen.name}</span>
             </div>
             <div className="grid grid-cols-4 gap-1.5">
                 {BACKDROPS.map((backdrop) => (
@@ -141,10 +99,10 @@ function StylePanel() {
                         style={{background: backdropGradient(backdrop)}}
                     >
                         <span className="h-[30%] w-[62%] rounded-[1px] shadow-[0_0_0_1px_rgb(17_17_17/0.4)]" style={{background: cardTint(backdrop)}}/>
-                        {backdrop.id === MAYA.backdrop && (
+                        {backdrop.id === chosen.id && (
                             <>
                                 <span className="absolute -inset-[3px] rounded-[5px] ring-2 ring-primary"/>
-                                <Cursor label="Sage" delay={0.9} className="top-[55%] left-[55%]"/>
+                                <Cursor label={chosen.name} delay={0.9} className="top-[55%] left-[55%]"/>
                             </>
                         )}
                     </span>
@@ -157,12 +115,12 @@ function StylePanel() {
 const HANDLES = ["-top-1 -left-1", "-top-1 -right-1", "-bottom-1 -left-1", "-bottom-1 -right-1"];
 
 /** The finished card, selected on the canvas: violet frame, square handles, the export size underneath. */
-export function ExportTile({caption = true}: { caption?: boolean }) {
+function ExportTile() {
     return (
-        <div aria-hidden className="w-full">
-            {caption && <Caption step="03">Export</Caption>}
+        <div className="w-full">
+            <Caption step="03">Export</Caption>
             <div className="relative">
-                <SampleTile sample={MAYA}/>
+                <ExportFrame example={exporting} className="ring-1 ring-rule"/>
                 <span className="pointer-events-none absolute -inset-1.5 border border-ring">
                     {HANDLES.map((position) => (
                         <span key={position} className={cn("absolute size-[7px] border border-ring bg-background", position)}/>
@@ -176,7 +134,7 @@ export function ExportTile({caption = true}: { caption?: boolean }) {
     );
 }
 
-/** Left edge: writing the testimonial, with the card it becomes tucked underneath. */
+/** Left edge, from 1280px: writing the testimonial, with the card it becomes tucked underneath. */
 export function DecoLeft() {
     return (
         <div aria-hidden className="pointer-events-none absolute top-1/2 left-[max(16px,calc(50%-660px))] hidden w-[300px] translate-y-[calc(-50%+24px)] xl:block">
@@ -184,14 +142,14 @@ export function DecoLeft() {
                 <Caption step="01">Write</Caption>
                 <WritePanel/>
                 <div className="relative -mt-5 ml-16 w-[210px]">
-                    <SampleTile sample={LEO}/>
+                    <ExportFrame example={writing} className="ring-1 ring-rule"/>
                 </div>
             </motion.div>
         </div>
     );
 }
 
-/** Right edge: picking a background, then the selected card ready to export. */
+/** Right edge, from 1280px: picking a background, then the selected card ready to export. */
 export function DecoRight() {
     return (
         <div aria-hidden className="pointer-events-none absolute top-1/2 right-[max(16px,calc(50%-660px))] hidden w-[300px] translate-y-[calc(-50%-16px)] xl:block">

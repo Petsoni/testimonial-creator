@@ -100,6 +100,20 @@
     --warn: #8a5300;
     --grid-line: rgb(17 17 17 / 0.05);
 
+    /* Neutral scale for illustrations of other surfaces, like the landing page's website and post mocks. */
+    --gray-0: #fafafa;
+    --gray-50: #f6f6f6;
+    --gray-100: #e7e7e7;
+    --gray-200: #d1d1d1;
+    --gray-300: #b0b0b0;
+    --gray-400: #888888;
+    --gray-500: #6d6d6d;
+    --gray-600: #5d5d5d;
+    --gray-700: #4f4f4f;
+    --gray-800: #454545;
+    --gray-900: #3d3d3d;
+    --gray-950: #171717;
+
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.2058 0.07 227.392);
@@ -145,6 +159,12 @@
     background: linear-gradient(to top right, transparent calc(50% - 0.5px), var(--rule) 50%, transparent calc(50% + 0.5px)),
     linear-gradient(to top left, transparent calc(50% - 0.5px), var(--rule) 50%, transparent calc(50% + 0.5px)),
     var(--background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 textarea {
