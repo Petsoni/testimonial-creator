@@ -8,12 +8,12 @@ function Wordmark({collapse = false}: { collapse?: boolean }) {
     return (
         <Link
             href="/"
-            className="flex items-center gap-2 rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="flex items-center gap-2 rounded-md outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
-            <span aria-hidden className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <span aria-hidden className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
                 <Quote className="size-3.5" fill="currentColor" strokeWidth={0}/>
             </span>
-            <span className={cn("text-sm! font-semibold! text-foreground", collapse && "max-sm:sr-only")}>EasyTestimonial</span>
+            <span className={cn("text-sm font-semibold text-foreground", collapse && "max-sm:sr-only")}>EasyTestimonial</span>
         </Link>
     );
 }

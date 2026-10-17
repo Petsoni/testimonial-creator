@@ -36,10 +36,9 @@ function PopoverContent({
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          "bg-popover text-popover-foreground z-50 w-72 origin-(--radix-popover-content-transform-origin) rounded-xl border p-4 shadow-lg outline-hidden",
-          "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:duration-200 data-[state=closed]:duration-150 ease-out",
-          // Zoom and slide only when motion is welcome; reduced motion gets a plain fade.
-          "motion-safe:data-[state=closed]:zoom-out-95 motion-safe:data-[state=open]:zoom-in-95 motion-safe:data-[side=bottom]:slide-in-from-top-2 motion-safe:data-[side=left]:slide-in-from-right-2 motion-safe:data-[side=right]:slide-in-from-left-2 motion-safe:data-[side=top]:slide-in-from-bottom-2",
+          "z-50 w-72 origin-(--radix-popover-content-transform-origin) rounded-md border border-rule bg-popover p-4 text-popover-foreground shadow-[0_10px_24px_-14px_rgb(17_17_17/0.35)] outline-hidden",
+          // A drafting tool doesn't drift: panels fade in place.
+          "ease-out data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:duration-150 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:duration-100",
           className
         )}
         {...props}

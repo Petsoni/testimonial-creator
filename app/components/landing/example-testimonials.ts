@@ -90,4 +90,18 @@ export const exampleTestimonials = {
         cardShadow: CardShadowEnum.SMALL,
         cardBorderWidth: 1,
     },
+    leo: {
+        displayType: DisplayTypeEnum.STYLE1,
+        username: "Leo Martins",
+        userFirm: "Kiln Ceramics",
+        separator: "·",
+        testimonialText: "Harbor & Pine rebuilt our shop in three weeks. Online orders are up 40% since launch.",
+        profilePicturePreview: avatar("Leo Martins", "c0aede"),
+        imageBorderRadius: 28,
+        backdropId: "lavender",
+        nameTone: "accent",
+        cardBorderRadius: 16,
+        cardShadow: CardShadowEnum.MEDIUM,
+        cardBorderWidth: 0,
+    },
 } satisfies Record<string, ExampleTestimonial>;

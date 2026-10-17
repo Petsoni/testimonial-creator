@@ -6,9 +6,9 @@ function WebsiteMock() {
     return (
         <div role="img"
              aria-label={`Two exported cards in the testimonials section of ${exampleStudio.name}'s website`}
-             className={"overflow-hidden rounded-xl border border-[var(--gray-100)] bg-white shadow-sm"}>
+             className={"overflow-hidden rounded-md border border-rule bg-white"}>
             <div aria-hidden
-                 className={"flex items-center gap-3 border-b border-[var(--gray-100)] bg-[var(--gray-50)] px-3 py-2.5 sm:px-4"}>
+                 className={"flex items-center gap-3 border-b border-rule bg-[var(--gray-50)] px-3 py-2.5 sm:px-4"}>
                 <div className={"flex w-12 shrink-0 gap-1.5"}>
                     <div className={"size-2.5 rounded-full bg-[var(--gray-200)]"}/>
                     <div className={"size-2.5 rounded-full bg-[var(--gray-200)]"}/>

@@ -9,7 +9,7 @@ function PostMock() {
     return (
         <div role="img"
              aria-label={`An exported card shared in a social media post by ${exampleStudio.name}`}
-             className={"mx-auto w-full max-w-md rounded-2xl border border-[var(--gray-100)] bg-white p-4 shadow-sm"}>
+             className={"mx-auto w-full max-w-md rounded-md border border-rule bg-white p-4"}>
             <div aria-hidden className={"flex flex-col gap-3"}>
                 <div className={"flex items-center gap-3"}>
                     <div className={"grid size-10 shrink-0 place-items-center rounded-full bg-[var(--gray-950)] text-sm text-white"}>

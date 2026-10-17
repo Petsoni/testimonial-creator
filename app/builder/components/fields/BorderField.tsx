@@ -13,13 +13,13 @@ function BorderField() {
     const on = cardBorderWidth > 0;
 
     return (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
                 <Label htmlFor={switchId} className={labelClass}>Border</Label>
                 <Switch id={switchId} checked={on} onCheckedChange={(checked) => setCardBorderWidth(checked ? 1 : 0)}/>
             </div>
-            <div className={cn("flex flex-col gap-1", !on && "opacity-50")}>
-                <output className={readoutClass}>{on ? `${cardBorderWidth}px, matched to the background` : "Off"}</output>
+            <div className="flex flex-col gap-1">
+                <output className={cn(readoutClass, !on && "opacity-60")}>{on ? `${cardBorderWidth}px, matched to the background` : "Off"}</output>
                 <Slider
                     value={[Math.max(cardBorderWidth, 1)]}
                     min={1}

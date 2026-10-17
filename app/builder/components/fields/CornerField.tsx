@@ -2,7 +2,6 @@ import React from "react";
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
 import {Field} from "@/components/ui/field";
 import {Slider} from "@/components/ui/slider";
-import {cn} from "@/lib/utils";
 import {labelClass, readoutClass} from "./fieldStyles";
 
 function CornerField() {
@@ -11,7 +10,7 @@ function CornerField() {
     return (
         <Field>
             <div className="flex items-baseline justify-between">
-                <div className={cn(labelClass, "font-medium")}>Corners</div>
+                <div className={labelClass}>Corners</div>
                 <output className={readoutClass}>{cardBorderRadius}px</output>
             </div>
             <Slider

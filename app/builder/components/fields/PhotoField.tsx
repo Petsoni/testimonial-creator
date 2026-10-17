@@ -1,13 +1,13 @@
-import React, {useId, useState} from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 import {type FileRejection, useDropzone} from "react-dropzone";
-import {ImageIcon, LoaderCircle, X} from "lucide-react";
+import {LoaderCircle, X} from "lucide-react";
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
 import {Field, FieldError} from "@/components/ui/field";
 import {Button} from "@/components/ui/button";
 import {Slider} from "@/components/ui/slider";
 import {cn} from "@/lib/utils";
-import {hintClass, labelClass, readoutClass} from "./fieldStyles";
+import {labelClass, readoutClass, ruledRowsClass} from "./fieldStyles";
 import AvatarPicker from "./AvatarPicker";
 
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
@@ -28,7 +28,6 @@ function rejectionMessage(rejection: FileRejection) {
 }
 
 function PhotoField() {
-    const labelId = useId();
     const {
         profilePicturePreview,
         setProfilePicturePreview,
@@ -71,55 +70,62 @@ function PhotoField() {
     const hasPhoto = Boolean(profilePicturePreview);
 
     return (
-        <div role="group" aria-labelledby={labelId} className="flex flex-col gap-3">
-            <div id={labelId} className={cn(labelClass, "font-medium")}>Photo</div>
-            <div
-                {...getRootProps({
-                    className: cn(
-                        "flex items-center gap-3 rounded-lg border border-dashed bg-background p-2.5 transition-colors",
-                        isDragActive && "border-ring bg-accent",
-                        error && "border-destructive/60"
-                    ),
-                })}
-            >
-                <input {...getInputProps({"aria-label": "Upload a photo"})}/>
+        // Whatever hosts the field titles it "Photo" visibly: the Studio's group heading, the dock's popover.
+        <div role="group" aria-label="Photo" className={ruledRowsClass}>
+            <div className="flex flex-col gap-2">
                 <div
-                    className="relative flex size-11 shrink-0 items-center justify-center overflow-hidden bg-muted text-muted-foreground"
-                    style={{borderRadius: hasPhoto ? Math.round(imageBorderRadius * (44 / 56)) : 8}}
+                    {...getRootProps({
+                        className: cn(
+                            "flex items-center gap-2.5 rounded-md border border-dashed border-rule bg-background p-2 transition-colors duration-150 ease-out",
+                            isDragActive && "border-solid bg-accent",
+                            error && "border-destructive"
+                        ),
+                    })}
                 >
-                    {loading ? (
-                        <LoaderCircle className="size-4 motion-safe:animate-spin" aria-label="Loading photo"/>
-                    ) : hasPhoto ? (
-                        <Image src={profilePicturePreview!} alt="Current photo" fill sizes="44px" className="object-cover"/>
-                    ) : (
-                        <ImageIcon className="size-4" aria-hidden/>
+                    <input {...getInputProps({"aria-label": "Upload a photo"})}/>
+                    {/* Empty, it's the wireframe placeholder: a box with a cross. */}
+                    <div
+                        className={cn(
+                            "relative flex size-11 shrink-0 items-center justify-center overflow-hidden",
+                            hasPhoto ? "outline outline-rule -outline-offset-1" : "border border-rule",
+                            !hasPhoto && !loading && "wf-placeholder"
+                        )}
+                        style={{borderRadius: hasPhoto ? Math.round(imageBorderRadius * (44 / 56)) : 2}}
+                    >
+                        {loading ? (
+                            <LoaderCircle className="size-4 motion-safe:animate-spin" aria-label="Loading photo"/>
+                        ) : hasPhoto ? (
+                            <Image src={profilePicturePreview!} alt="Current photo" fill sizes="44px" className="object-cover"/>
+                        ) : null}
+                    </div>
+                    <div className="min-w-0 flex-1 leading-tight">
+                        <div className="truncate text-[13px] font-medium">
+                            {isDragActive ? "Drop to use this photo" : hasPhoto ? "Photo added" : "Drag a photo here"}
+                        </div>
+                        <small className="block truncate font-mono text-[11px] text-muted-foreground">
+                            PNG, JPG or WebP, up to 5 MB
+                        </small>
+                    </div>
+                    <Button type="button" variant="outline" size="sm" onClick={open}>
+                        {hasPhoto ? "Replace" : "Choose"}
+                    </Button>
+                    {hasPhoto && (
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon-sm"
+                            aria-label="Remove photo"
+                            onClick={() => {
+                                setProfilePicturePreview(undefined);
+                                setError(null);
+                            }}
+                        >
+                            <X/>
+                        </Button>
                     )}
                 </div>
-                <div className="min-w-0 flex-1 leading-tight">
-                    <div className="truncate text-sm">
-                        {isDragActive ? "Drop to use this photo" : hasPhoto ? "Photo added" : "Drag a photo here"}
-                    </div>
-                    <small className={cn(hintClass, "block truncate")}>PNG, JPG or WebP, up to 5 MB</small>
-                </div>
-                <Button type="button" variant="outline" size="sm" onClick={open} className="text-sm!">
-                    {hasPhoto ? "Replace" : "Choose"}
-                </Button>
-                {hasPhoto && (
-                    <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon-sm"
-                        aria-label="Remove photo"
-                        onClick={() => {
-                            setProfilePicturePreview(undefined);
-                            setError(null);
-                        }}
-                    >
-                        <X/>
-                    </Button>
-                )}
+                {error && <FieldError>{error}</FieldError>}
             </div>
-            {error && <FieldError>{error}</FieldError>}
             <AvatarPicker
                 selected={profilePicturePreview}
                 onPick={(avatar) => {
@@ -128,8 +134,8 @@ function PhotoField() {
                 }}
             />
             <Field data-disabled={!hasPhoto || undefined}>
-                <div className="flex items-baseline justify-between">
-                    <div className={cn(labelClass, "font-medium")}>Photo corners</div>
+                <div className="flex items-baseline justify-between group-data-[disabled=true]/field:opacity-60">
+                    <div className={labelClass}>Photo corners</div>
                     <output className={readoutClass}>
                         {imageBorderRadius >= CIRCLE_RADIUS ? "Circle" : `${imageBorderRadius}px`}
                     </output>

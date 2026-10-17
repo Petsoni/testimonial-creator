@@ -7,8 +7,8 @@ import {links} from "@/app/components/landing/links";
 
 function SiteHeader() {
     return (
-        <header className={"relative z-20"}>
-            <div className={"mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6"}>
+        <header className={"relative z-20 border-b border-rule bg-background"}>
+            <div className={"mx-auto flex h-[52px] w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6"}>
                 <Wordmark/>
                 <nav aria-label="Main" className={"flex items-center gap-1"}>
                     <Button asChild variant="ghost" size="sm">
@@ -18,7 +18,8 @@ function SiteHeader() {
                             <span className={"sr-only"}> (opens in a new tab)</span>
                         </a>
                     </Button>
-                    <Button asChild size="sm">
+                    {/* Outlined, so the hero's call to action is the only ink-filled button in view. */}
+                    <Button asChild variant="outline" size="sm">
                         <Link href={links.builder}>Open builder</Link>
                     </Button>
                 </nav>

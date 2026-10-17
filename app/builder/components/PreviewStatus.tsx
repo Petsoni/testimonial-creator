@@ -9,7 +9,7 @@ function PreviewStatus({className}: { className?: string }) {
     const size = ARTBOARD_SIZE * EXPORT_SCALE;
 
     return (
-        <div className={cn("grid justify-items-center text-xs text-muted-foreground tabular-nums", className)}>
+        <div className={cn("grid justify-items-center font-mono text-[11px] tracking-[0.06em] text-ink-2 uppercase tabular-nums", className)}>
             <small
                 aria-hidden={!canExport || undefined}
                 className={cn("col-start-1 row-start-1 transition-opacity duration-200", !canExport && "opacity-0")}

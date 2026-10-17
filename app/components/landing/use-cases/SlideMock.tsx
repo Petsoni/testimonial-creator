@@ -6,7 +6,7 @@ function SlideMock() {
     return (
         <div role="img"
              aria-label={`An exported card on a case-study slide in ${exampleStudio.name}'s pitch deck`}
-             className={"rounded-xl bg-[var(--gray-100)] p-3 shadow-sm sm:p-5"}>
+             className={"rounded-md border border-rule bg-[var(--gray-100)] p-3 sm:p-5"}>
             {/* Everything inside is sized in cqw, so the slide keeps its proportions at any width. */}
             <div aria-hidden
                  className={"@container grid aspect-video grid-cols-[minmax(0,1fr)_auto] items-center gap-[4%] overflow-hidden rounded-md bg-white p-[5%] shadow-md"}>

@@ -49,10 +49,11 @@ function Artboard({className}: { className?: string }) {
         >
             {scale !== null && (
                 <motion.div
-                    initial={{opacity: 0, scale: 0.97}}
-                    animate={{opacity: 1, scale: 1}}
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
                     transition={{duration: duration.slow, ease: ease.out}}
-                    className="relative shrink-0 overflow-hidden rounded-md shadow-[0_1px_2px_rgb(0_0_0/0.06),0_12px_32px_-12px_rgb(0_0_0/0.25)] ring-1 ring-black/5"
+                    // The artboard is a frame on the drafting grid: square corners, one ink line, no lift.
+                    className="relative shrink-0 overflow-hidden ring-1 ring-rule"
                     style={{width: ARTBOARD_SIZE * scale, height: ARTBOARD_SIZE * scale}}
                 >
                     <div
