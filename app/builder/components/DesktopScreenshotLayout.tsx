@@ -9,6 +9,7 @@ import RightSidebar from './right-sidebar/RightSidebar';
 import {Button} from "@/components/ui/button";
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
 import {captureScreenshot} from "@/lib/screenshot-service";
+import {cardCanvasBackground} from "@/lib/utils";
 import {IconDownload} from "@tabler/icons-react";
 
 function DesktopScreenshotLayout() {
@@ -21,7 +22,7 @@ function DesktopScreenshotLayout() {
                 <LeftSidebar/>
             </div>
             <section className={"w-full flex flex-col items-center justify-between"} style={{
-                background: `linear-gradient(135deg, oklch(from ${cardColor} calc(l - -1) c h) 25%, oklch(from ${cardColor} calc(l - 0.25) c h))`
+                background: cardCanvasBackground(cardColor)
             }}>
                 <div></div>
                 <div className="flex flex-col gap-6 items-center">

@@ -1,4 +1,5 @@
 import html2canvas from "html2canvas-pro";
+import {cardCanvasBackground} from "@/lib/utils";
 
 export function captureScreenshot(cardColor: string, username: string, userFirm: string) {
     const original = document.getElementById("testimonialCardDiv");
@@ -8,7 +9,7 @@ export function captureScreenshot(cardColor: string, username: string, userFirm:
     const watermark = document.createElement("h6");
     captureDiv.id = "captureScreenshot";
     captureDiv.className = "capture-screenshot";
-    captureDiv.style.background = `linear-gradient(135deg, oklch(from ${cardColor} calc(l - -1) c h) 25%, oklch(from ${cardColor} calc(l - 0.25) c h))`;
+    captureDiv.style.background = cardCanvasBackground(cardColor);
 
     /* todo Watermark for free versions (implement when payment is added)
         watermark.innerHTML = "Free version of Testimonial Creator";
