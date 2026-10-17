@@ -1,11 +1,10 @@
 import React, {useId} from "react";
-import {AnimatePresence, motion} from "motion/react";
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
 import {DisplayTypeEnum} from "@/lib/models/display-type.enum";
 import {Field, FieldLabel} from "@/components/ui/field";
 import {Input} from "@/components/ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {hintClass, labelClass} from "./fieldStyles";
+import {labelClass, labelHintClass} from "./fieldStyles";
 
 const SEPARATORS = [
     {value: "none", glyph: "None"},
@@ -22,16 +21,17 @@ const SEPARATORS = [
 function CompanyField() {
     const id = useId();
     const {userFirm, setUserFirm, separator, setSeparator, displayType} = useTestimonialContent();
-    // Only the side-by-side layout prints a separator between name and company.
-    const showSeparator = userFirm != "" && displayType === DisplayTypeEnum.STYLE1;
+    // Only the side-by-side layout prints a separator between name and company. It stays in place while
+    // typing, so the input never changes width under the cursor, and unlocks once there's a company.
+    const sideBySide = displayType === DisplayTypeEnum.STYLE1;
     const selected = separator === "" ? "none" : separator;
 
     return (
         <Field>
             <FieldLabel htmlFor={id} className={labelClass}>
-                Company <small className={hintClass}>optional</small>
+                Company <small className={labelHintClass}>optional</small>
             </FieldLabel>
-            <div className="flex">
+            <div className="flex gap-2">
                 <Input
                     id={id}
                     value={userFirm}
@@ -40,33 +40,29 @@ function CompanyField() {
                     autoComplete="off"
                     maxLength={60}
                 />
-                <AnimatePresence initial={false}>
-                    {showSeparator && (
-                        <motion.div
-                            key="separator"
-                            className="shrink-0"
-                            initial={{width: 0, opacity: 0, overflow: "hidden"}}
-                            animate={{width: "auto", opacity: 1, transitionEnd: {overflow: "visible"}}}
-                            exit={{width: 0, opacity: 0, overflow: "hidden"}}
-                        >
-                            <Select value={selected} onValueChange={(value) => setSeparator(value === "none" ? "" : value)}>
-                                <SelectTrigger aria-label="Separator" className="ml-2 w-20">
-                                    <SelectValue className="text-sm!">
-                                        {SEPARATORS.find((option) => option.value === selected)?.glyph}
-                                    </SelectValue>
-                                </SelectTrigger>
-                                <SelectContent align="end">
-                                    {SEPARATORS.map((option) => (
-                                        <SelectItem key={option.value} value={option.value}>
-                                            <span className="min-w-8 text-sm!">{option.glyph}</span>
-                                            {option.name && <span className="text-sm! text-muted-foreground">{option.name}</span>}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {sideBySide && (
+                    <Select
+                        value={selected}
+                        disabled={userFirm.trim() === ""}
+                        onValueChange={(value) => setSeparator(value === "none" ? "" : value)}
+                    >
+                        <SelectTrigger aria-label="Separator between name and company" className="w-20 shrink-0">
+                            <SelectValue>
+                                {SEPARATORS.find((option) => option.value === selected)?.glyph}
+                            </SelectValue>
+                        </SelectTrigger>
+                        <SelectContent align="end">
+                            {SEPARATORS.map((option) => (
+                                <SelectItem key={option.value} value={option.value}>
+                                    <span className="min-w-8">{option.glyph}</span>
+                                    {option.name && (
+                                        <span className="font-mono text-[11px] text-muted-foreground">{option.name}</span>
+                                    )}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                )}
             </div>
         </Field>
     );

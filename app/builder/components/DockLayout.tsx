@@ -3,7 +3,7 @@ import {MotionConfig, motion} from "motion/react";
 import {Eraser, ImageIcon, Palette, SquareRoundCorner, Type, X} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {Popover, PopoverClose, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {duration, ease, spring} from "@/lib/motion";
+import {duration, ease} from "@/lib/motion";
 import {cn} from "@/lib/utils";
 import Artboard from "./Artboard";
 import ExportButton from "./ExportButton";
@@ -20,6 +20,7 @@ import NameToneField from "./fields/NameToneField";
 import CornerField from "./fields/CornerField";
 import BorderField from "./fields/BorderField";
 import ShadowField from "./fields/ShadowField";
+import {ruledRowsClass} from "./fields/fieldStyles";
 
 type ToolId = "text" | "photo" | "style" | "shape";
 
@@ -82,14 +83,14 @@ function DockLayout() {
 
     return (
         <MotionConfig reducedMotion="user" transition={{duration: duration.base, ease: ease.out}}>
-            <div className="relative flex h-dvh min-h-[480px] flex-col overflow-hidden">
-                <header className="relative z-20 flex shrink-0 items-center justify-between gap-3 px-4 pt-4 sm:px-6 sm:pt-5">
+            <div className="bg-drafting relative flex h-dvh min-h-[480px] flex-col overflow-hidden">
+                <header className="relative z-20 flex h-[52px] shrink-0 items-center justify-between gap-3 border-b border-rule bg-background px-4 sm:px-6">
                     <Wordmark collapse/>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-2">
                         <StartOverDialog>
-                            <Button variant="ghost" size="sm" aria-label="Clear card" className="text-sm!">
+                            <Button variant="outline" size="sm" aria-label="Clear card">
                                 <Eraser/>
-                                <span className="hidden text-sm! sm:inline">Clear</span>
+                                <span className="hidden sm:inline">Clear</span>
                             </Button>
                         </StartOverDialog>
                         <ExportButton size="sm" compact/>
@@ -119,7 +120,7 @@ function DockLayout() {
                     transition={{duration: duration.slow, ease: ease.out, delay: 0.12}}
                     className="pointer-events-none fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 flex justify-center px-3"
                 >
-                    <div className="pointer-events-auto flex items-center gap-1 rounded-2xl border bg-background/85 p-1.5 shadow-lg ring-1 ring-black/5 backdrop-blur-md">
+                    <div className="pointer-events-auto flex items-center gap-1 rounded-md border border-rule bg-background p-1 shadow-[0_10px_24px_-14px_rgb(17_17_17/0.35)]">
                         {TOOLS.map((tool) => {
                             const isOpen = open === tool.id;
                             return (
@@ -131,17 +132,11 @@ function DockLayout() {
                                     <PopoverTrigger asChild>
                                         <button
                                             type="button"
-                                            className="relative flex h-12 w-14 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=open]:text-foreground"
+                                            // The open tool fills with ink, the way a chosen segment does; it snaps rather than slides.
+                                            className="flex h-12 w-14 cursor-pointer flex-col items-center justify-center gap-1 rounded-sm text-foreground outline-none transition-colors duration-150 ease-out hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring data-[state=open]:bg-primary data-[state=open]:text-primary-foreground"
                                         >
-                                            {isOpen && (
-                                                <motion.span
-                                                    layoutId="dock-active-tool"
-                                                    transition={spring.snappy}
-                                                    className="absolute inset-0 rounded-xl bg-accent"
-                                                />
-                                            )}
-                                            <tool.icon className="relative size-[18px]"/>
-                                            <small className="relative text-[11px] leading-none">{tool.label}</small>
+                                            <tool.icon className="size-[18px]"/>
+                                            <small className="font-mono text-[10px] leading-none font-medium tracking-[0.06em] uppercase">{tool.label}</small>
                                         </button>
                                     </PopoverTrigger>
                                     <PopoverContent
@@ -160,15 +155,15 @@ function DockLayout() {
                                         // Room for the card and its caption above, the dock below.
                                         className="flex max-h-[max(220px,calc(100dvh-min(100vw-2rem,42dvh)-12rem))] w-[min(22rem,calc(100vw-24px))] flex-col p-0"
                                     >
-                                        <div className="flex shrink-0 items-center justify-between gap-2 border-b py-2 pr-2 pl-4">
-                                            <h2 className="text-sm! font-semibold! text-foreground">{tool.title}</h2>
+                                        <div className="flex shrink-0 items-center justify-between gap-2 border-b border-rule py-2 pr-2 pl-4">
+                                            <h2 className="text-sm font-semibold">{tool.title}</h2>
                                             <PopoverClose asChild>
                                                 <Button variant="ghost" size="icon-sm" aria-label="Close">
                                                     <X/>
                                                 </Button>
                                             </PopoverClose>
                                         </div>
-                                        <div data-tool-body className="flex min-h-0 flex-col gap-5 overflow-y-auto p-4">
+                                        <div data-tool-body className={cn(ruledRowsClass, "min-h-0 overflow-y-auto p-4")}>
                                             {tool.body()}
                                         </div>
                                     </PopoverContent>

@@ -21,7 +21,7 @@ function QuoteField({className}: { className?: string }) {
                 <output
                     htmlFor={id}
                     id={`${id}-count`}
-                    className={cn(readoutClass, nearLimit && "text-amber-700", atLimit && "text-destructive")}
+                    className={cn(readoutClass, nearLimit && "text-warn", atLimit && "text-destructive")}
                 >
                     {atLimit ? "Limit reached · " : ""}{count} / {QUOTE_LIMIT}
                 </output>
@@ -34,7 +34,7 @@ function QuoteField({className}: { className?: string }) {
                 maxLength={QUOTE_LIMIT}
                 rows={5}
                 aria-describedby={`${id}-count`}
-                className={cn("min-h-28 text-sm! leading-relaxed outline-none focus-visible:ring-[3px]", className)}
+                className={cn("min-h-30", className)}
             />
         </Field>
     );

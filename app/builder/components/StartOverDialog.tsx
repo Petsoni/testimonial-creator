@@ -32,8 +32,8 @@ function StartOverDialog({children}: { children: ReactNode }) {
                 }}
             >
                 <AlertDialogHeader>
-                    <AlertDialogTitle className="text-base! font-semibold! text-foreground">Start over?</AlertDialogTitle>
-                    <AlertDialogDescription className="text-sm!">
+                    <AlertDialogTitle>Start over?</AlertDialogTitle>
+                    <AlertDialogDescription>
                         This clears the name, quote, photo and design settings. You can’t undo it.
                     </AlertDialogDescription>
                 </AlertDialogHeader>

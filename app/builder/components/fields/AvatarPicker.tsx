@@ -64,7 +64,7 @@ function AvatarPicker({selected, onPick}: { selected: string | undefined, onPick
     return (
         <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-                <div className={cn(labelClass, "font-medium")}>Or pick an avatar</div>
+                <div className={labelClass}>Or pick an avatar</div>
                 <Button variant="ghost" size="icon-sm"
                         aria-label="Shuffle avatars"
                         onClick={() => setSeeds(randomSeeds())}>
@@ -73,11 +73,11 @@ function AvatarPicker({selected, onPick}: { selected: string | undefined, onPick
             </div>
             <Select value={styleKey} onValueChange={setStyleKey}>
                 <SelectTrigger className={"w-full"} aria-label="Avatar style">
-                    <SelectValue className="text-sm!"/>
+                    <SelectValue/>
                 </SelectTrigger>
                 <SelectContent>
                     {Object.entries(AVATAR_STYLES).map(([key, {label}]) => (
-                        <SelectItem key={key} value={key}><span className="text-sm!">{label}</span></SelectItem>
+                        <SelectItem key={key} value={key}>{label}</SelectItem>
                     ))}
                 </SelectContent>
             </Select>
@@ -88,8 +88,8 @@ function AvatarPicker({selected, onPick}: { selected: string | undefined, onPick
                             aria-pressed={isSelected(uri)}
                             onClick={() => handlePick(uri)}
                             className={cn(
-                                "aspect-square overflow-hidden rounded-full cursor-pointer outline-none transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                                isSelected(uri) && "ring-2 ring-primary ring-offset-2"
+                                "aspect-square cursor-pointer overflow-hidden rounded-md border border-rule-soft outline-none transition-colors duration-150 ease-out hover:border-rule focus-visible:outline-2 focus-visible:outline-offset-[5px] focus-visible:outline-ring",
+                                isSelected(uri) && "border-rule ring-2 ring-primary ring-offset-2"
                             )}>
                         <Image width={56} height={56} src={uri} alt="" className={"size-full"}/>
                     </button>

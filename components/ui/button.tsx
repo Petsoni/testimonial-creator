@@ -5,27 +5,28 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  // Ink edge on every variant that has a fill or outline; ghost and link keep a transparent one so sizes match.
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md border text-[13px] font-medium select-none outline-none transition-[background-color,border-color,color] duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-not-allowed disabled:border-muted-line disabled:bg-muted disabled:text-[#8d8d8d] motion-safe:active:not-disabled:translate-y-px aria-invalid:border-destructive [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer",
+        default: "border-rule bg-primary text-primary-foreground hover:not-disabled:bg-primary/85",
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "border-destructive bg-destructive text-white hover:not-disabled:border-destructive/90 hover:not-disabled:bg-destructive/90",
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border-rule bg-background text-foreground hover:not-disabled:bg-accent",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "border-transparent bg-secondary text-secondary-foreground hover:not-disabled:bg-[#e8e6e2]",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border-transparent text-foreground hover:not-disabled:bg-accent",
+        link: "border-transparent text-foreground underline underline-offset-4 hover:decoration-2",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        default: "h-9 px-3.5",
+        sm: "h-[30px] px-2.5 text-xs",
+        lg: "h-10 px-5 text-sm",
         icon: "size-9",
-        "icon-sm": "size-8",
+        "icon-sm": "size-[30px]",
         "icon-lg": "size-10",
       },
     },

@@ -2,7 +2,6 @@ import React, {useId} from "react";
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
 import {CardShadowEnum} from "@/lib/models/card-shadow.enum";
 import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group";
-import {cn} from "@/lib/utils";
 import {labelClass} from "./fieldStyles";
 
 const SHADOWS = [
@@ -18,8 +17,8 @@ function ShadowField() {
     const {cardShadow, setCardShadow} = useTestimonialContent();
 
     return (
-        <div className="flex flex-col gap-3">
-            <div id={labelId} className={cn(labelClass, "font-medium")}>Shadow</div>
+        <div className="flex flex-col gap-2">
+            <div id={labelId} className={labelClass}>Shadow</div>
             <ToggleGroup
                 type="single"
                 variant="outline"
@@ -29,7 +28,7 @@ function ShadowField() {
                 onValueChange={(value) => value && setCardShadow(value === "none" ? "" : value)}
             >
                 {SHADOWS.map((shadow) => (
-                    <ToggleGroupItem key={shadow.value} value={shadow.value} className="px-1 text-xs!">
+                    <ToggleGroupItem key={shadow.value} value={shadow.value} className="px-1">
                         {shadow.label}
                     </ToggleGroupItem>
                 ))}

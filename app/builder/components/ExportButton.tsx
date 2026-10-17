@@ -84,7 +84,11 @@ function ExportButton({
                 onClick={runExport}
                 disabled={!canExport}
                 aria-busy={status === "loading" || undefined}
-                className={cn("relative overflow-hidden", status === "error" && "bg-destructive hover:bg-destructive/90", className)}
+                className={cn(
+                    "relative overflow-hidden",
+                    status === "error" && "border-destructive bg-destructive hover:not-disabled:border-destructive/90 hover:not-disabled:bg-destructive/90",
+                    className
+                )}
                 {...props}
             >
                 {/* Every label is laid out invisibly so the button never changes width. */}
@@ -92,19 +96,20 @@ function ExportButton({
                     {(Object.keys(labels) as Status[]).map((key) => {
                         const GhostIcon = ICONS[key];
                         return (
-                            <span key={key} aria-hidden className="invisible col-start-1 row-start-1 flex items-center justify-center gap-2 text-sm!">
+                            <span key={key} aria-hidden className="invisible col-start-1 row-start-1 flex items-center justify-center gap-1.5">
                                 <GhostIcon/>{labels[key]}
                             </span>
                         );
                     })}
                     <AnimatePresence mode="popLayout" initial={false}>
+                        {/* Labels swap in place; the button never moves under the pointer. */}
                         <motion.span
                             key={status}
-                            initial={{opacity: 0, y: 8}}
-                            animate={{opacity: 1, y: 0}}
-                            exit={{opacity: 0, y: -8}}
+                            initial={{opacity: 0}}
+                            animate={{opacity: 1}}
+                            exit={{opacity: 0}}
                             transition={{duration: duration.fast, ease: ease.out}}
-                            className="col-start-1 row-start-1 flex items-center justify-center gap-2 text-sm!"
+                            className="col-start-1 row-start-1 flex items-center justify-center gap-1.5"
                         >
                             <Icon className={cn(status === "loading" && "motion-safe:animate-spin")} aria-hidden/>
                             {labels[status]}
