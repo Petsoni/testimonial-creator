@@ -33,8 +33,8 @@ function WebsiteMock() {
                     Kind words from the people we build with
                 </div>
                 <div className={"mt-6 grid gap-4 sm:grid-cols-2"}>
-                    <ExportFrame card={exampleTestimonials.ingrid} className={"rounded-lg"}/>
-                    <ExportFrame card={exampleTestimonials.daniel} className={"rounded-lg"}/>
+                    <ExportFrame example={exampleTestimonials.ingrid} className={"rounded-lg"}/>
+                    <ExportFrame example={exampleTestimonials.daniel} className={"rounded-lg"}/>
                 </div>
             </div>
         </div>

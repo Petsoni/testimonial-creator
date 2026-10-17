@@ -1,11 +1,24 @@
-import type {TestimonialContentContextType} from "@/context/TestimonialContentContext";
+import {createAvatar} from "@dicebear/core";
+import {notionists} from "@dicebear/collection";
 import {DisplayTypeEnum} from "@/lib/models/display-type.enum";
 import {CardShadowEnum} from "@/lib/models/card-shadow.enum";
+import type {NameTone} from "@/lib/backdrops";
 
-export type ExampleTestimonial = Pick<TestimonialContentContextType,
-    "displayType" | "username" | "usernameColor" | "userFirm" | "userFirmLink" | "separator" | "testimonialText" |
-    "profilePicturePreview" | "imageBorderRadius" | "cardColor" | "cardBorderRadius" | "cardShadow" |
-    "cardBorderWidth" | "cardBorderColor">;
+/** The builder's design choices for one card, as plain data so it can cross into client components. */
+export type ExampleTestimonial = {
+    displayType: DisplayTypeEnum;
+    username: string;
+    userFirm: string;
+    separator: string;
+    testimonialText: string;
+    profilePicturePreview: string;
+    imageBorderRadius: number;
+    backdropId: string;
+    nameTone: NameTone;
+    cardBorderRadius: number;
+    cardShadow: string;
+    cardBorderWidth: number;
+};
 
 // The studio using EasyTestimonial in the landing page scenes.
 export const exampleStudio = {
@@ -15,81 +28,66 @@ export const exampleStudio = {
     domain: "harborandpine.example",
 };
 
-/** An initials avatar as a data URI, so next/image renders it without remote image config. */
-function initialsAvatar(name: string, background: string, foreground: string) {
-    const initials = name.split(" ").map((word) => word[0]).join("").slice(0, 2).toUpperCase();
-    const svg =
-        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 112">` +
-        `<rect width="112" height="112" fill="${background}"/>` +
-        `<text x="56" y="56" dy=".36em" text-anchor="middle" fill="${foreground}" ` +
-        `font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="42" font-weight="600">` +
-        `${initials}</text></svg>`;
-    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+/** The builder's default avatar style for people without a photo, seeded by name so it never changes. */
+function avatar(seed: string, backgroundColor: string) {
+    return createAvatar(notionists, {seed, backgroundColor: [backgroundColor]}).toDataUri();
 }
 
 export const exampleTestimonials = {
     ingrid: {
         displayType: DisplayTypeEnum.STYLE1,
         username: "Ingrid Solberg",
-        usernameColor: "#1D4ED8",
         userFirm: "Hearth & Co.",
-        userFirmLink: "",
         separator: "·",
         testimonialText: "Our bookings doubled the month the new site went live. I still get compliments on it.",
-        profilePicturePreview: initialsAvatar("Ingrid Solberg", "#BFDBFE", "#1D4ED8"),
-        imageBorderRadius: 12,
-        cardColor: "#EFF6FF",
+        profilePicturePreview: avatar("Ingrid Solberg", "b6e3f4"),
+        imageBorderRadius: 28,
+        backdropId: "sky",
+        nameTone: "accent",
         cardBorderRadius: 12,
         cardShadow: CardShadowEnum.MEDIUM,
         cardBorderWidth: 0,
-        cardBorderColor: "",
     },
     daniel: {
         displayType: DisplayTypeEnum.STYLE2,
         username: "Daniel Reyes",
-        usernameColor: "#15803D",
         userFirm: "Fieldnote",
-        userFirmLink: "",
         separator: "",
         testimonialText: "Clear estimates, zero surprises, and a launch that landed on the exact date we planned.",
-        profilePicturePreview: initialsAvatar("Daniel Reyes", "#BBF7D0", "#15803D"),
+        profilePicturePreview: avatar("Daniel Reyes", "d1d4f9"),
         imageBorderRadius: 28,
-        cardColor: "#F0FDF4",
+        backdropId: "sage",
+        nameTone: "accent",
         cardBorderRadius: 24,
         cardShadow: CardShadowEnum.MEDIUM,
         cardBorderWidth: 2,
-        cardBorderColor: "#86EFAC",
     },
     maya: {
         displayType: DisplayTypeEnum.STYLE1,
         username: "Maya Okafor",
-        usernameColor: "#B45309",
         userFirm: "Northwind Studio",
-        userFirmLink: "",
         separator: "·",
         testimonialText: "They rebuilt our onboarding in two weeks. Activation went from 31% to 48%, and support tickets dropped by half.",
-        profilePicturePreview: initialsAvatar("Maya Okafor", "#FED7AA", "#B45309"),
+        profilePicturePreview: avatar("Maya Okafor", "ffdfbf"),
         imageBorderRadius: 28,
-        cardColor: "#FFF7ED",
+        backdropId: "peach",
+        nameTone: "accent",
         cardBorderRadius: 16,
         cardShadow: CardShadowEnum.LARGE,
         cardBorderWidth: 1,
-        cardBorderColor: "#FED7AA",
     },
     lucia: {
         displayType: DisplayTypeEnum.STYLE1,
         username: "Lucía Ferrer",
-        usernameColor: "#B91C1C",
         userFirm: "Café Ortiga",
-        userFirmLink: "",
         separator: "—",
         testimonialText: "Warm, quick, and genuinely invested in our little café. We'd hire them again tomorrow.",
-        profilePicturePreview: initialsAvatar("Lucía Ferrer", "#FECACA", "#B91C1C"),
+        profilePicturePreview: avatar("Lucía Ferrer", "ffd5dc"),
         imageBorderRadius: 28,
-        cardColor: "#FEF2F2",
+        backdropId: "blush",
+        nameTone: "accent",
         cardBorderRadius: 20,
         cardShadow: CardShadowEnum.SMALL,
         cardBorderWidth: 1,
-        cardBorderColor: "#FECACA",
     },
 } satisfies Record<string, ExampleTestimonial>;

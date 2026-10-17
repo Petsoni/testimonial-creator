@@ -2,13 +2,21 @@
 
 import React, {createContext, useContext, useState} from "react";
 import {DisplayTypeEnum} from "@/lib/models/display-type.enum";
+import {CardShadowEnum} from "@/lib/models/card-shadow.enum";
+import {
+    Backdrop,
+    borderTint,
+    cardTint,
+    DEFAULT_BACKDROP,
+    findBackdrop,
+    nameColor,
+    NameTone,
+} from "@/lib/backdrops";
 
 export interface TestimonialContentContextType {
-    // Left sidebar
+    // Content
     username: string;
     setUsername: (username: string) => void;
-    usernameColor: string;
-    setUsernameColor: (usernameColor: string) => void;
     userFirm: string;
     setUserFirm: (userFirm: string) => void;
     userFirmLink: string;
@@ -18,84 +26,113 @@ export interface TestimonialContentContextType {
     separator: string;
     setSeparator: (separator: string) => void;
     profilePicturePreview: string | undefined;
-    setProfilePicturePreview: (imageString: string) => void;
+    setProfilePicturePreview: (imageString: string | undefined) => void;
     imageBorderRadius: number;
     setImageBorderRadius: (borderRadius: number) => void;
 
-    // Right sidebar
+    // Design
     displayType: DisplayTypeEnum;
     setDisplayType: (displayType: DisplayTypeEnum) => void;
-    cardColor: string;
-    setCardColor: (color: string) => void;
+    backdrop: Backdrop;
+    setBackdrop: (backdropId: string) => void;
+    nameTone: NameTone;
+    setNameTone: (nameTone: NameTone) => void;
     cardBorderRadius: number;
     setCardBorderRadius: (borderRadius: number) => void;
-    // setCardBorderRadiusClass: (borderRadius: number) => void;
     cardShadow: string;
     setCardShadow: (shadow: string) => void;
     cardBorderWidth: number;
     setCardBorderWidth: (borderWidth: number) => void;
+
+    // Derived from the backdrop so every combination stays readable; the card styles read these.
+    cardColor: string;
     cardBorderColor: string;
-    setCardBorderColor: (borderColor: string) => void;
-    renderedCardContent: string;
-    setRenderedCardContent: (renderedCardContent: string) => void;
+    usernameColor: string;
+
+    // Bumped by resetCard so the preview can swap in a fresh card.
+    cardKey: number;
+    resetCard: () => void;
 }
 
 export const TestimonialContentContext = createContext<TestimonialContentContextType | undefined>(undefined);
 
-export function TestimonialContentProvider({children}) {
+// A near-white card needs a shadow to read on the light backdrops.
+const DEFAULT_CARD_SHADOW: string = CardShadowEnum.MEDIUM;
+const DEFAULT_SEPARATOR = "·";
 
-    // Left sidebar
+export function TestimonialContentProvider({children}: { children: React.ReactNode }) {
+
+    // Content
     const [username, setUsername] = useState("");
-    const [usernameColor, setUsernameColor] = useState("");
     const [userFirm, setUserFirm] = useState("");
     const [userFirmLink, setUserFirmLink] = useState("");
     const [testimonialText, setTestimonialText] = useState("");
-    const [separator, setSeparator] = useState("");
+    const [separator, setSeparator] = useState(DEFAULT_SEPARATOR);
     const [profilePicturePreview, setProfilePicturePreview] = useState<string | undefined>();
     const [imageBorderRadius, setImageBorderRadius] = useState<number>(0);
 
-    // Right sidebar
+    // Design
     const [displayType, setDisplayType] = useState(DisplayTypeEnum.STYLE1);
-    const [cardColor, setCardColor] = useState("#FFFFFF");
+    const [backdropId, setBackdropId] = useState(DEFAULT_BACKDROP.id);
+    const [nameTone, setNameTone] = useState<NameTone>("ink");
     const [cardBorderRadius, setCardBorderRadius] = useState<number>(16);
-    const [cardShadow, setCardShadow] = useState<string>("");
+    const [cardShadow, setCardShadow] = useState<string>(DEFAULT_CARD_SHADOW);
     const [cardBorderWidth, setCardBorderWidth] = useState<number>(0);
-    const [cardBorderColor, setCardBorderColor] = useState<string>("");
 
-    const [renderedCardContent, setRenderedCardContent] = useState<string>("");
+    const [cardKey, setCardKey] = useState(0);
+
+    const backdrop = findBackdrop(backdropId);
+
+    const resetCard = () => {
+        setUsername("");
+        setUserFirm("");
+        setUserFirmLink("");
+        setTestimonialText("");
+        setSeparator(DEFAULT_SEPARATOR);
+        setProfilePicturePreview(undefined);
+        setImageBorderRadius(0);
+        setDisplayType(DisplayTypeEnum.STYLE1);
+        setBackdropId(DEFAULT_BACKDROP.id);
+        setNameTone("ink");
+        setCardBorderRadius(16);
+        setCardShadow(DEFAULT_CARD_SHADOW);
+        setCardBorderWidth(0);
+        setCardKey((key) => key + 1);
+    };
 
     return (
         <TestimonialContentContext.Provider value={{
             username,
             setUsername,
-            usernameColor,
-            setUsernameColor,
             userFirm,
             setUserFirm,
+            userFirmLink,
+            setUserFirmLink,
             testimonialText,
             setTestimonialText,
             separator,
             setSeparator,
-            displayType,
-            setDisplayType,
             profilePicturePreview,
             setProfilePicturePreview,
             imageBorderRadius,
             setImageBorderRadius,
-            userFirmLink,
-            setUserFirmLink,
-            cardColor,
-            setCardColor,
+            displayType,
+            setDisplayType,
+            backdrop,
+            setBackdrop: setBackdropId,
+            nameTone,
+            setNameTone,
             cardBorderRadius,
             setCardBorderRadius,
             cardShadow,
             setCardShadow,
             cardBorderWidth,
             setCardBorderWidth,
-            cardBorderColor,
-            setCardBorderColor,
-            renderedCardContent,
-            setRenderedCardContent
+            cardColor: cardTint(backdrop),
+            cardBorderColor: cardBorderWidth > 0 ? borderTint(backdrop) : "transparent",
+            usernameColor: nameColor(backdrop, nameTone),
+            cardKey,
+            resetCard,
         }}>
             {children}
         </TestimonialContentContext.Provider>

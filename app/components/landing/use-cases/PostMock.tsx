@@ -4,7 +4,7 @@ import ExportFrame from "@/app/components/landing/ExportFrame";
 import {exampleStudio, exampleTestimonials} from "@/app/components/landing/example-testimonials";
 
 function PostMock() {
-    const card = exampleTestimonials.lucia;
+    const example = exampleTestimonials.lucia;
 
     return (
         <div role="img"
@@ -21,9 +21,9 @@ function PostMock() {
                     </div>
                 </div>
                 <div className={"text-[15px] leading-normal text-[var(--gray-900)]"}>
-                    {card.userFirm}&apos;s new site went live this week. Their words, not ours:
+                    {example.userFirm}&apos;s new site went live this week. Their words, not ours:
                 </div>
-                <ExportFrame card={card} className={"rounded-xl ring-1 ring-black/5"}/>
+                <ExportFrame example={example} className={"rounded-xl ring-1 ring-black/5"}/>
                 <div className={"flex gap-6 pt-1 text-sm text-[var(--gray-500)] tabular-nums"}>
                     <div className={"flex items-center gap-1.5"}><IconHeart className={"size-4"}/>128</div>
                     <div className={"flex items-center gap-1.5"}><IconMessageCircle className={"size-4"}/>14</div>

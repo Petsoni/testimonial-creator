@@ -2,12 +2,13 @@
 
 import React from 'react';
 import {motion, MotionConfig} from 'motion/react';
+import {duration, ease} from "@/lib/motion";
 
 /**
- * The app's fade-up entrance (lib/variants.ts) without the blur: opacity and translate only.
+ * The app's fade-up entrance (lib/motion.ts), triggered on mount or when scrolled into view.
  * With reduced motion the translate is skipped and only the fade remains.
  */
-function Reveal({children, className, delay = 0, inView = false, y = 12}: {
+function Reveal({children, className, delay = 0, inView = false, y = 8}: {
     children: React.ReactNode;
     className?: string;
     delay?: number;
@@ -15,7 +16,7 @@ function Reveal({children, className, delay = 0, inView = false, y = 12}: {
     inView?: boolean;
     y?: number;
 }) {
-    const shown = {opacity: 1, y: 0, transition: {duration: 0.3, ease: [0.23, 1, 0.32, 1] as const, delay}};
+    const shown = {opacity: 1, y: 0, transition: {duration: duration.slow, ease: ease.out, delay}};
     const trigger = inView
         ? {whileInView: shown, viewport: {once: true, margin: "0px 0px -8% 0px"}}
         : {animate: shown};

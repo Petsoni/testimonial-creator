@@ -20,7 +20,7 @@ function SlideMock() {
                     </div>
                 </div>
                 {/* The slide's content box is 56.25% − 10% padding of its width tall, so a 46cqw square fills it. */}
-                <ExportFrame card={exampleTestimonials.maya} className={"w-[46cqw] rounded-sm shadow-sm"}/>
+                <ExportFrame example={exampleTestimonials.maya} className={"w-[46cqw] rounded-sm shadow-sm"}/>
             </div>
         </div>
     );
