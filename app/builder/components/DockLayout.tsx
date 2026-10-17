@@ -3,16 +3,15 @@ import {MotionConfig, motion} from "motion/react";
 import {Eraser, ImageIcon, Palette, SquareRoundCorner, Type, X} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {Popover, PopoverClose, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {useTestimonialContent} from "@/context/TestimonialContentContext";
 import {duration, ease, spring} from "@/lib/motion";
 import {cn} from "@/lib/utils";
 import Artboard from "./Artboard";
 import ExportButton from "./ExportButton";
 import PreviewStatus from "./PreviewStatus";
+import StartOverDialog from "./StartOverDialog";
 import Wordmark from "./Wordmark";
 import NameField from "./fields/NameField";
 import CompanyField from "./fields/CompanyField";
-import SeparatorField from "./fields/SeparatorField";
 import QuoteField from "./fields/QuoteField";
 import PhotoField from "./fields/PhotoField";
 import LayoutField from "./fields/LayoutField";
@@ -40,7 +39,6 @@ const TOOLS: {
             <>
                 <NameField/>
                 <CompanyField/>
-                <SeparatorField/>
                 <QuoteField className="max-h-44"/>
             </>
         ),
@@ -79,7 +77,6 @@ const FIRST_FIELD = "input:not([type=file]):not(:disabled), textarea, [role=radi
 /** Phone and tablet builder: the card owns the screen; controls open on demand from a dock. */
 function DockLayout() {
     const [open, setOpen] = useState<ToolId | null>(null);
-    const {resetCard} = useTestimonialContent();
     // While a tool is open the card moves to the top so the popover never covers it.
     const editing = open !== null;
 
@@ -89,10 +86,12 @@ function DockLayout() {
                 <header className="relative z-20 flex shrink-0 items-center justify-between gap-3 px-4 pt-4 sm:px-6 sm:pt-5">
                     <Wordmark collapse/>
                     <div className="flex items-center gap-1.5">
-                        <Button variant="ghost" size="sm" onClick={resetCard} aria-label="Clear card" className="text-sm!">
-                            <Eraser/>
-                            <span className="hidden text-sm! sm:inline">Clear</span>
-                        </Button>
+                        <StartOverDialog>
+                            <Button variant="ghost" size="sm" aria-label="Clear card" className="text-sm!">
+                                <Eraser/>
+                                <span className="hidden text-sm! sm:inline">Clear</span>
+                            </Button>
+                        </StartOverDialog>
                         <ExportButton size="sm" compact/>
                     </div>
                 </header>

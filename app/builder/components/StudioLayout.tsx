@@ -3,16 +3,15 @@ import {MotionConfig, motion} from "motion/react";
 import {RotateCcw} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
-import {useTestimonialContent} from "@/context/TestimonialContentContext";
 import {duration, ease, fadeUp, stagger} from "@/lib/motion";
 import {cn} from "@/lib/utils";
 import Artboard from "./Artboard";
 import ExportButton from "./ExportButton";
 import PreviewStatus from "./PreviewStatus";
+import StartOverDialog from "./StartOverDialog";
 import Wordmark from "./Wordmark";
 import NameField from "./fields/NameField";
 import CompanyField from "./fields/CompanyField";
-import SeparatorField from "./fields/SeparatorField";
 import QuoteField from "./fields/QuoteField";
 import PhotoField from "./fields/PhotoField";
 import LayoutField from "./fields/LayoutField";
@@ -24,18 +23,18 @@ import ShadowField from "./fields/ShadowField";
 
 /** Desktop builder: every control visible at once, content on the left, design on the right. */
 function StudioLayout() {
-    const {resetCard} = useTestimonialContent();
-
     return (
         <MotionConfig reducedMotion="user" transition={{duration: duration.base, ease: ease.out}}>
             <div className="flex h-dvh flex-col overflow-x-clip bg-muted/40">
                 <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b bg-background/90 px-5 backdrop-blur-md">
                     <Wordmark/>
                     <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="sm" onClick={resetCard} className="text-sm!">
-                            <RotateCcw/>
-                            <span className="text-sm!">Start over</span>
-                        </Button>
+                        <StartOverDialog>
+                            <Button variant="ghost" size="sm" className="text-sm!">
+                                <RotateCcw/>
+                                <span className="text-sm!">Start over</span>
+                            </Button>
+                        </StartOverDialog>
                         <ExportButton size="sm"/>
                     </div>
                 </header>
@@ -44,7 +43,6 @@ function StudioLayout() {
                     <Panel side="left" title="Content" description="What they said and who said it">
                         <NameField/>
                         <CompanyField/>
-                        <SeparatorField/>
                         <QuoteField/>
                         <PhotoField/>
                     </Panel>

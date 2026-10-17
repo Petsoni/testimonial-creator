@@ -49,6 +49,8 @@ export interface TestimonialContentContextType {
     cardBorderColor: string;
     usernameColor: string;
 
+    // Bumped by resetCard so the preview can swap in a fresh card.
+    cardKey: number;
     resetCard: () => void;
 }
 
@@ -56,6 +58,7 @@ export const TestimonialContentContext = createContext<TestimonialContentContext
 
 // A near-white card needs a shadow to read on the light backdrops.
 const DEFAULT_CARD_SHADOW: string = CardShadowEnum.MEDIUM;
+const DEFAULT_SEPARATOR = "·";
 
 export function TestimonialContentProvider({children}: { children: React.ReactNode }) {
 
@@ -64,7 +67,7 @@ export function TestimonialContentProvider({children}: { children: React.ReactNo
     const [userFirm, setUserFirm] = useState("");
     const [userFirmLink, setUserFirmLink] = useState("");
     const [testimonialText, setTestimonialText] = useState("");
-    const [separator, setSeparator] = useState("");
+    const [separator, setSeparator] = useState(DEFAULT_SEPARATOR);
     const [profilePicturePreview, setProfilePicturePreview] = useState<string | undefined>();
     const [imageBorderRadius, setImageBorderRadius] = useState<number>(0);
 
@@ -76,6 +79,8 @@ export function TestimonialContentProvider({children}: { children: React.ReactNo
     const [cardShadow, setCardShadow] = useState<string>(DEFAULT_CARD_SHADOW);
     const [cardBorderWidth, setCardBorderWidth] = useState<number>(0);
 
+    const [cardKey, setCardKey] = useState(0);
+
     const backdrop = findBackdrop(backdropId);
 
     const resetCard = () => {
@@ -83,7 +88,7 @@ export function TestimonialContentProvider({children}: { children: React.ReactNo
         setUserFirm("");
         setUserFirmLink("");
         setTestimonialText("");
-        setSeparator("");
+        setSeparator(DEFAULT_SEPARATOR);
         setProfilePicturePreview(undefined);
         setImageBorderRadius(0);
         setDisplayType(DisplayTypeEnum.STYLE1);
@@ -92,6 +97,7 @@ export function TestimonialContentProvider({children}: { children: React.ReactNo
         setCardBorderRadius(16);
         setCardShadow(DEFAULT_CARD_SHADOW);
         setCardBorderWidth(0);
+        setCardKey((key) => key + 1);
     };
 
     return (
@@ -125,6 +131,7 @@ export function TestimonialContentProvider({children}: { children: React.ReactNo
             cardColor: cardTint(backdrop),
             cardBorderColor: cardBorderWidth > 0 ? borderTint(backdrop) : "transparent",
             usernameColor: nameColor(backdrop, nameTone),
+            cardKey,
             resetCard,
         }}>
             {children}

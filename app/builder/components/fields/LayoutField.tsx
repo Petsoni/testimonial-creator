@@ -1,4 +1,4 @@
-import React, {useId, useRef} from "react";
+import React, {useId} from "react";
 import {motion} from "motion/react";
 import {RadioGroup as RadioGroupPrimitive} from "radix-ui";
 import {useTestimonialContent} from "@/context/TestimonialContentContext";
@@ -44,19 +44,7 @@ function LayoutSchematic({type}: { type: DisplayTypeEnum }) {
 function LayoutField() {
     const labelId = useId();
     const indicatorId = useId();
-    const {displayType, setDisplayType, separator, setSeparator} = useTestimonialContent();
-    // Stacked has no separator slot; keep the user's choice for when they switch back.
-    const savedSeparator = useRef(separator);
-
-    const changeLayout = (next: DisplayTypeEnum) => {
-        if (next === DisplayTypeEnum.STYLE2) {
-            savedSeparator.current = separator || savedSeparator.current;
-            setSeparator("");
-        } else {
-            setSeparator(savedSeparator.current);
-        }
-        setDisplayType(next);
-    };
+    const {displayType, setDisplayType} = useTestimonialContent();
 
     return (
         <div className="flex flex-col gap-3">
@@ -64,7 +52,7 @@ function LayoutField() {
             <RadioGroupPrimitive.Root
                 aria-labelledby={labelId}
                 value={displayType}
-                onValueChange={(value) => changeLayout(value as DisplayTypeEnum)}
+                onValueChange={(value) => setDisplayType(value as DisplayTypeEnum)}
                 className="grid grid-cols-2 gap-2"
             >
                 {LAYOUTS.map((layout) => (

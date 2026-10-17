@@ -1,11 +1,21 @@
 import React, {useLayoutEffect, useRef, useState} from "react";
-import {AnimatePresence, motion} from "motion/react";
+import {AnimatePresence, motion, MotionConfig} from "motion/react";
 import TestimonialCard from "@/app/builder/components/TestimonialCard";
-import {useTestimonialContent} from "@/context/TestimonialContentContext";
+import {TestimonialContentContext, useTestimonialContent} from "@/context/TestimonialContentContext";
 import {backdropGradient} from "@/lib/backdrops";
 import {duration, ease} from "@/lib/motion";
 import {ARTBOARD_SIZE} from "@/lib/screenshot-service";
 import {cn} from "@/lib/utils";
+
+// Start over tosses the old card off the board while a fresh one settles in underneath.
+const deal = {
+    initial: {opacity: 0, y: 12, scale: 0.97},
+    animate: {opacity: 1, y: 0, scale: 1, transition: {duration: duration.slow, ease: ease.out, delay: 0.1}},
+    discard: {
+        opacity: 0, x: -160, y: 48, rotate: -10, scale: 0.94, zIndex: 1,
+        transition: {duration: duration.slow, ease: ease.in, zIndex: {duration: 0}},
+    },
+};
 
 /**
  * The square the PNG is cut from, scaled to fit its box. What you see here is
@@ -14,7 +24,8 @@ import {cn} from "@/lib/utils";
 function Artboard({className}: { className?: string }) {
     const boxRef = useRef<HTMLElement>(null);
     const [scale, setScale] = useState<number | null>(null);
-    const {displayType, backdrop} = useTestimonialContent();
+    const content = useTestimonialContent();
+    const {backdrop, cardKey} = content;
 
     useLayoutEffect(() => {
         const box = boxRef.current;
@@ -53,16 +64,24 @@ function Artboard({className}: { className?: string }) {
                             background: backdropGradient(backdrop),
                         }}
                     >
-                        <div id="testimonialCardDiv" className="relative">
-                            <AnimatePresence mode="popLayout" initial={false}>
+                        {/* Both cards share one grid cell during the swap, so neither shifts. */}
+                        <div id="testimonialCardDiv" className="relative grid place-items-center">
+                            <AnimatePresence initial={false}>
                                 <motion.div
-                                    key={displayType}
-                                    initial={{opacity: 0, scale: 0.96}}
-                                    animate={{opacity: 1, scale: 1}}
-                                    exit={{opacity: 0, scale: 0.98}}
-                                    transition={{duration: duration.slow, ease: ease.out}}
+                                    key={cardKey}
+                                    variants={deal}
+                                    initial="initial"
+                                    animate="animate"
+                                    exit="discard"
+                                    className="col-start-1 row-start-1"
                                 >
-                                    <TestimonialCard/>
+                                    {/* The leaving card keeps the content it had instead of emptying mid-toss. */}
+                                    <TestimonialContentContext.Provider value={content}>
+                                        {/* Layout animations measure on screen; undo the preview scale so moves land where they started. */}
+                                        <MotionConfig transformPagePoint={({x, y}) => ({x: x / scale, y: y / scale})}>
+                                            <TestimonialCard/>
+                                        </MotionConfig>
+                                    </TestimonialContentContext.Provider>
                                 </motion.div>
                             </AnimatePresence>
                         </div>
