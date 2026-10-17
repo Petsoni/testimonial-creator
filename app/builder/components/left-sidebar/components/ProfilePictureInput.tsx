@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import {Dropzone, DropzoneContent, DropzoneEmptyState} from '@/components/ui/shadcn-io/dropzone';
 import {Slider} from '@/components/ui/slider';
+import AvatarPicker from "@/app/builder/components/left-sidebar/components/AvatarPicker";
 
 function ProfilePictureInput() {
     const [files, setFiles] = useState<File[] | undefined>();
@@ -48,6 +49,12 @@ function ProfilePictureInput() {
         }
     };
 
+    const handleAvatarPick = (avatar: string) => {
+        setFiles(undefined);
+        setProfilePicturePreview(avatar);
+        localStorage.setItem("profileImageBlob", avatar);
+    };
+
     return (
         <Field className="mb-4">
             <FieldLabel>Profile picture</FieldLabel>
@@ -64,6 +71,7 @@ function ProfilePictureInput() {
                 <DropzoneEmptyState/>
                 <DropzoneContent className="text-ellipsis whitespace-nowrap max-w-50"/>
             </Dropzone>
+            <AvatarPicker selected={profilePicturePreview} onPick={handleAvatarPick}/>
             {profilePicturePreview && (
                 <Field className="mt-4">
                     <FieldLabel htmlFor="profilePictureBorderRadius">Border radius</FieldLabel>
