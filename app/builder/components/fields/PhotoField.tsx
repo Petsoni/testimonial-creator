@@ -8,6 +8,7 @@ import {Button} from "@/components/ui/button";
 import {Slider} from "@/components/ui/slider";
 import {cn} from "@/lib/utils";
 import {hintClass, labelClass, readoutClass} from "./fieldStyles";
+import AvatarPicker from "./AvatarPicker";
 
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
 // The card renders the photo at 56px, so half of that is a full circle.
@@ -119,6 +120,13 @@ function PhotoField() {
                 )}
             </div>
             {error && <FieldError>{error}</FieldError>}
+            <AvatarPicker
+                selected={profilePicturePreview}
+                onPick={(avatar) => {
+                    setProfilePicturePreview(avatar);
+                    setError(null);
+                }}
+            />
             <Field data-disabled={!hasPhoto || undefined}>
                 <div className="flex items-baseline justify-between">
                     <div className={cn(labelClass, "font-medium")}>Photo corners</div>
