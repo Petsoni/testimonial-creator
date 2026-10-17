@@ -17,7 +17,7 @@ function CardStyle1({cardProps}: { cardProps: Partial<TestimonialContentContextT
             }}>
             {cardProps.profilePicturePreview && cardProps.profilePicturePreview ? (
                 <Image width={56} height={56}
-                       className={`w-full border-2 max-w-14 object-cover h-14`}
+                       className={`size-14 min-w-14 min-h-14 shrink-0 border-2 object-cover`}
                        style={{
                            borderRadius: `${cardProps.imageBorderRadius}px`,
                            borderColor: cardProps.cardBorderColor,
