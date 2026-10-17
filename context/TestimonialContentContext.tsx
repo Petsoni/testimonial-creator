@@ -42,7 +42,6 @@ export interface TestimonialContentContextType {
 
 export const TestimonialContentContext = createContext<TestimonialContentContextType | undefined>(undefined);
 
-// @ts-ignore
 export function TestimonialContentProvider({children}) {
 
     // Left sidebar

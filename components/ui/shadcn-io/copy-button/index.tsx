@@ -63,6 +63,8 @@ function CopyButton({
   const Icon = localIsCopied ? CheckIcon : CopyIcon;
 
   React.useEffect(() => {
+    // Syncs the controlled `isCopied` prop into local state (upstream shadcn-io pattern).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocalIsCopied(isCopied ?? false);
   }, [isCopied]);
 
