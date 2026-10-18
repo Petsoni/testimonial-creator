@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <!--
+    The Wordmark's mark: an ink square with 4px corners (on a 28px grid) and Lucide's filled quote glyph.
+    The glyph is 18px here rather than the header's 14px, so it still reads as quote marks at 16px tab size.
+  -->
+  <style>
+    .edge { stroke: none; }
+    /* On dark tab strips the ink square would disappear, so it gains a faint edge there. */
+    @media (prefers-color-scheme: dark) {
+      .edge { stroke: #ffffff; stroke-opacity: 0.28; }
+    }
+  </style>
+  <rect width="28" height="28" rx="4" fill="#111111"/>
+  <rect class="edge" x="0.5" y="0.5" width="27" height="27" rx="3.5" fill="none" stroke-width="1"/>
+  <g fill="#ffffff" transform="translate(5 5) scale(0.75)">
+    <path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/>
+    <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/>
+  </g>
+</svg>
